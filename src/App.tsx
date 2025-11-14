@@ -1,0 +1,130 @@
+import React, { useState, useEffect } from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import NewClient from './pages/NewClient';
+import Policies from './pages/Policies';
+import Claims from './pages/Claims';
+import Commissions from './pages/Commissions';
+import Reports from './pages/Reports';
+import Support from './pages/Support';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AgentManagement from './pages/admin/AgentManagement';
+import ManagerDashboard from './pages/manager/ManagerDashboard';
+import TeamOverview from './pages/manager/TeamOverview';
+import Sidebar from './components/Sidebar';
+import TopNav from './components/TopNav';
+
+function AppContent() {
+  const { user, agent, loading } = useAuth();
+  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (agent) {
+      if (agent.role === 'admin') {
+        setCurrentPage('admin-dashboard');
+      } else if (agent.role === 'manager') {
+        setCurrentPage('manager-dashboard');
+      } else {
+        setCurrentPage('dashboard');
+      }
+    }
+  }, [agent]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!user || !agent) {
+    return <Login />;
+  }
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'admin-dashboard':
+        return <AdminDashboard />;
+      case 'agent-management':
+        return <AgentManagement />;
+      case 'manager-dashboard':
+        return <ManagerDashboard />;
+      case 'team-overview':
+        return <TeamOverview />;
+      case 'dashboard':
+        return <Dashboard />;
+      case 'new-client':
+        return <NewClient />;
+      case 'policies':
+        return <Policies />;
+      case 'claims':
+        return <Claims />;
+      case 'commissions':
+        return <Commissions />;
+      case 'reports':
+        return <Reports />;
+      case 'support':
+        return <Support />;
+      case 'profile':
+        return <Profile />;
+      case 'settings':
+        return <Settings />;
+      default:
+        if (agent?.role === 'admin') return <AdminDashboard />;
+        if (agent?.role === 'manager') return <ManagerDashboard />;
+        return <Dashboard />;
+    }
+  };
+
+  return (
+    <div className="flex h-screen overflow-hidden bg-gray-50">
+      <div className={`hidden lg:block ${sidebarCollapsed ? 'w-20' : 'w-64'} transition-all duration-300`}>
+        <Sidebar
+          currentPage={currentPage}
+          onNavigate={setCurrentPage}
+          collapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+        />
+      </div>
+
+      {mobileSidebarOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-50" onClick={() => setMobileSidebarOpen(false)}>
+          <div className="w-64 h-full" onClick={(e) => e.stopPropagation()}>
+            <Sidebar
+              currentPage={currentPage}
+              onNavigate={(page) => {
+                setCurrentPage(page);
+                setMobileSidebarOpen(false);
+              }}
+              collapsed={false}
+              onToggleCollapse={() => setMobileSidebarOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <TopNav onMenuClick={() => setMobileSidebarOpen(true)} onNavigate={setCurrentPage} />
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto">
+            {renderPage()}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+}

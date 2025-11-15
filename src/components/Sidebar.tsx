@@ -10,7 +10,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Users,
-  UsersRound
+  UsersRound,
+  Clock,
+  CheckCircle,
+  Download,
+  MessageSquare,
+  Shield,
+  Trophy
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -22,13 +28,14 @@ interface SidebarProps {
 }
 
 const agentMenuItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['agent', 'manager', 'admin'] },
-  { id: 'new-client', label: 'New Client Referral', icon: UserPlus, roles: ['agent'] },
-  { id: 'policies', label: 'Policy Management', icon: FileText, roles: ['agent', 'manager', 'admin'] },
-  { id: 'claims', label: 'Claims Center', icon: ClipboardList, roles: ['agent', 'manager', 'admin'] },
-  { id: 'commissions', label: 'Commissions', icon: DollarSign, roles: ['agent', 'manager', 'admin'] },
-  { id: 'reports', label: 'Reports & Analytics', icon: BarChart3, roles: ['agent', 'manager', 'admin'] },
-  { id: 'support', label: 'Support', icon: BookOpen, roles: ['agent', 'manager', 'admin'] },
+  { id: 'referral-dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'new-referral', label: 'New Referral', icon: UserPlus },
+  { id: 'pending-referrals', label: 'Pending Referrals', icon: Clock },
+  { id: 'completed-referrals', label: 'Completed Referrals', icon: CheckCircle },
+  { id: 'documents', label: 'Documents', icon: Download },
+  { id: 'support-tickets', label: 'Support / Complaints', icon: MessageSquare },
+  { id: 'terms-policies', label: 'Terms & Policies', icon: Shield },
+  { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
 ];
 
 const managerMenuItems = [
@@ -44,6 +51,10 @@ const managerMenuItems = [
 const adminMenuItems = [
   { id: 'admin-dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'agent-management', label: 'Agent Management', icon: Users },
+  { id: 'referral-management', label: 'Referral Management', icon: ClipboardList },
+  { id: 'documents', label: 'Documents', icon: Download },
+  { id: 'support-tickets', label: 'Support Tickets', icon: MessageSquare },
+  { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
   { id: 'policies', label: 'All Policies', icon: FileText },
   { id: 'claims', label: 'All Claims', icon: ClipboardList },
   { id: 'commissions', label: 'Commissions', icon: DollarSign },
@@ -63,27 +74,27 @@ export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCo
   const menuItems = getMenuItems();
   return (
     <aside
-      className={`bg-gray-900 text-white transition-all duration-300 flex flex-col ${
+      className={`bg-navy-500 text-white transition-all duration-300 flex flex-col ${
         collapsed ? 'w-20' : 'w-64'
       }`}
     >
-      <div className="p-6 flex items-center justify-between border-b border-gray-800">
+      <div className="p-6 flex items-center justify-between border-b border-navy-700">
         {!collapsed && (
           <div className="flex items-center space-x-3">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-              agent?.role === 'admin' ? 'bg-blue-600' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-orange-600'
+              agent?.role === 'admin' ? 'bg-yellow-500' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-yellow-500'
             }`}>
-              <span className="text-xl font-bold">IA</span>
+              <span className="text-xl font-bold">BG</span>
             </div>
             <div>
-              <h1 className="font-bold text-lg">InsureAgent</h1>
-              <p className="text-xs text-gray-400 capitalize">{agent?.role || 'Portal'}</p>
+              <h1 className="font-bold text-lg">BearGuard</h1>
+              <p className="text-xs text-gray-400 capitalize">{agent?.role || 'Rep'}</p>
             </div>
           </div>
         )}
         <button
           onClick={onToggleCollapse}
-          className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+          className="p-2 hover:bg-navy-700 rounded-lg transition-colors"
         >
           {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
         </button>
@@ -100,8 +111,8 @@ export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCo
               onClick={() => onNavigate(item.id)}
               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                 isActive
-                  ? `${agent?.role === 'admin' ? 'bg-blue-600' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-orange-600'} text-white shadow-lg`
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                  ? `${agent?.role === 'admin' ? 'bg-yellow-500' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-yellow-500'} text-gray-900 shadow-lg font-semibold`
+                  : 'text-gray-400 hover:bg-navy-700 hover:text-white'
               } ${collapsed ? 'justify-center' : ''}`}
               title={collapsed ? item.label : ''}
             >

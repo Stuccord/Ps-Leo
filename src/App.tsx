@@ -12,8 +12,17 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AgentManagement from './pages/admin/AgentManagement';
+import ReferralManagement from './pages/admin/ReferralManagement';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import TeamOverview from './pages/manager/TeamOverview';
+import ReferralDashboard from './pages/ReferralDashboard';
+import NewReferral from './pages/NewReferral';
+import PendingReferrals from './pages/PendingReferrals';
+import CompletedReferrals from './pages/CompletedReferrals';
+import Documents from './pages/Documents';
+import SupportTickets from './pages/SupportTickets';
+import TermsPolicies from './pages/TermsPolicies';
+import Leaderboard from './pages/Leaderboard';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 
@@ -30,7 +39,7 @@ function AppContent() {
       } else if (agent.role === 'manager') {
         setCurrentPage('manager-dashboard');
       } else {
-        setCurrentPage('dashboard');
+        setCurrentPage('referral-dashboard');
       }
     }
   }, [agent]);
@@ -53,14 +62,32 @@ function AppContent() {
         return <AdminDashboard />;
       case 'agent-management':
         return <AgentManagement />;
+      case 'referral-management':
+        return <ReferralManagement />;
       case 'manager-dashboard':
         return <ManagerDashboard />;
       case 'team-overview':
         return <TeamOverview />;
       case 'dashboard':
         return <Dashboard />;
+      case 'referral-dashboard':
+        return <ReferralDashboard />;
       case 'new-client':
         return <NewClient />;
+      case 'new-referral':
+        return <NewReferral />;
+      case 'pending-referrals':
+        return <PendingReferrals />;
+      case 'completed-referrals':
+        return <CompletedReferrals />;
+      case 'documents':
+        return <Documents />;
+      case 'support-tickets':
+        return <SupportTickets />;
+      case 'terms-policies':
+        return <TermsPolicies />;
+      case 'leaderboard':
+        return <Leaderboard />;
       case 'policies':
         return <Policies />;
       case 'claims':
@@ -78,7 +105,7 @@ function AppContent() {
       default:
         if (agent?.role === 'admin') return <AdminDashboard />;
         if (agent?.role === 'manager') return <ManagerDashboard />;
-        return <Dashboard />;
+        return <ReferralDashboard />;
     }
   };
 

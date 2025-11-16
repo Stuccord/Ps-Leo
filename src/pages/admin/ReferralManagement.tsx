@@ -19,7 +19,7 @@ interface Referral {
   payment_date: string | null;
   notes: string | null;
   created_at: string;
-  agents: { full_name: string };
+  agents: { full_name: string } | null;
 }
 
 export default function ReferralManagement() {
@@ -125,7 +125,7 @@ export default function ReferralManagement() {
     const matchesSearch =
       ref.case_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ref.client_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      ref.agents.full_name.toLowerCase().includes(searchTerm.toLowerCase());
+      (ref.agents?.full_name || '').toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesFilter = filterStatus === 'all' || ref.status === filterStatus;
 
@@ -213,7 +213,7 @@ export default function ReferralManagement() {
                         <div className="text-xs text-gray-500">{formatDate(referral.created_at)}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {referral.agents.full_name}
+                        {referral.agents?.full_name || 'Unknown'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{referral.client_name}</div>
@@ -289,7 +289,7 @@ export default function ReferralManagement() {
                         <div className="text-xs text-gray-500">{formatDate(referral.created_at)}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {referral.agents.full_name}
+                        {referral.agents?.full_name || 'Unknown'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">{referral.client_name}</div>

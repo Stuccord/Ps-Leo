@@ -23,15 +23,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-navy-500 via-navy-600 to-navy-800 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-3xl shadow-2xl p-8">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-4">
-              <Shield className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-4">
+              <Shield className="w-8 h-8 text-gray-900" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-            <p className="text-gray-600 mt-2">Sign in to your portal</p>
+            <h1 className="text-3xl font-bold text-navy-500">BearGuard</h1>
+            <p className="text-gray-600 mt-2">Referral Rep Portal</p>
           </div>
 
           {error && (
@@ -50,7 +50,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
                 placeholder="agent@insurance.com"
               />
             </div>
@@ -64,7 +64,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
                 placeholder="••••••••"
               />
             </div>
@@ -72,7 +72,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-navy-500 text-white py-3 rounded-xl font-semibold hover:bg-navy-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>

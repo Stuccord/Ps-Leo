@@ -44,9 +44,9 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
               />
             ) : (
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                agent?.role === 'admin' ? 'bg-blue-600' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-orange-600'
+                agent?.role === 'admin' ? 'bg-yellow-500' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-yellow-500'
               }`}>
-                <span className="text-white text-sm font-semibold">
+                <span className="text-gray-900 text-sm font-semibold">
                   {agent?.full_name?.charAt(0) || 'A'}
                 </span>
               </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Users, Shield, DollarSign, TrendingUp, UserCheck, UserX } from 'lucide-react';
+import { Users, Shield, DollarSign, TrendingUp, UserCheck, UserX, Phone, Mail, MapPin } from 'lucide-react';
 import StatCard from '../../components/StatCard';
 import { supabase } from '../../lib/supabase';
 
@@ -10,6 +10,18 @@ interface AdminStats {
   totalPolicies: number;
   totalCommissions: number;
   pendingClaims: number;
+}
+
+interface Agent {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  hospital_affiliation: string | null;
+  is_active: boolean;
+  role: string;
+  avatar_url: string | null;
+  created_at: string;
 }
 
 interface AdminDashboardProps {
@@ -25,10 +37,12 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {})
     totalCommissions: 0,
     pendingClaims: 0,
   });
+  const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAdminStats();
+    fetchAgents();
   }, []);
 
   const fetchAdminStats = async () => {
@@ -63,6 +77,21 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {})
       console.error('Error fetching admin stats:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchAgents = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('agents')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      if (error) throw error;
+      setAgents(data || []);
+    } catch (error) {
+      console.error('Error fetching agents:', error);
     }
   };
 
@@ -196,6 +225,100 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {})
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-gray-900">All Referral Reps</h2>
+          <button
+            onClick={() => onNavigate?.('agent-management')}
+            className="text-sm text-blue-600 hover:text-blue-700 font-semibold"
+          >
+            View All
+          </button>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Rep</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Contact</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Hospital</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Status</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Role</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {agents.map((agent) => (
+                <tr key={agent.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="py-4 px-4">
+                    <div className="flex items-center space-x-3">
+                      {agent.avatar_url ? (
+                        <img
+                          src={agent.avatar_url}
+                          alt={agent.full_name}
+                          className="w-10 h-10 rounded-full"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                          <span className="text-blue-600 font-semibold text-sm">
+                            {agent.full_name.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      <div>
+                        <div className="font-semibold text-gray-900">{agent.full_name}</div>
+                        <div className="text-xs text-gray-500">ID: {agent.id.slice(0, 8)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Mail className="w-4 h-4" />
+                        <span>{agent.email}</span>
+                      </div>
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Phone className="w-4 h-4" />
+                        <span>{agent.phone}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <MapPin className="w-4 h-4" />
+                      <span>{agent.hospital_affiliation || 'N/A'}</span>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4">
+                    {agent.is_active ? (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                        Inactive
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-4 px-4">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 capitalize">
+                      {agent.role}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {agents.length === 0 && (
+            <div className="text-center py-12">
+              <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-500">No referral reps found</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

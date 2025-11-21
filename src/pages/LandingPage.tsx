@@ -78,7 +78,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           <div className="flex justify-between items-center h-24">
             <div className="flex items-center">
               <img
-                src="/Untitled-1 (5).png"
+                src="/Ps-Leo Logo 1o.png"
                 alt="BearGuard Support Services"
                 className={`transition-all duration-300 ${scrolled ? 'h-20' : 'h-24'} w-auto cursor-pointer`}
                 onClick={() => scrollToSection('home')}

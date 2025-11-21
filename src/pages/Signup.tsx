@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, ArrowLeft, Mail, Lock, User, Phone, Building, Eye, EyeOff, Check } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, Phone, Building, Eye, EyeOff, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface SignupProps {
@@ -88,9 +88,8 @@ export default function Signup({ onNavigate }: SignupProps) {
 
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Shield className="w-10 h-10 text-orange-600" />
-              <span className="text-2xl font-bold text-gray-900">BearGuard</span>
+            <div className="flex items-center justify-center mb-4">
+              <img src="/Ps-Leo_9-removebg-preview.png" alt="BearGuard" className="w-20 h-20" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Our Referral Network</h1>
             <p className="text-gray-600">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 interface LoginProps {
@@ -41,9 +41,7 @@ export default function Login({ onNavigate }: LoginProps = {}) {
         )}
         <div className="bg-white rounded-3xl shadow-2xl p-8">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mb-4">
-              <Shield className="w-8 h-8 text-white" />
-            </div>
+            <img src="/Ps-Leo_9-removebg-preview.png" alt="BearGuard" className="w-24 h-24 mb-4" />
             <h1 className="text-3xl font-bold text-gray-900">BearGuard</h1>
             <p className="text-gray-600 mt-2">Referral Rep Portal</p>
           </div>

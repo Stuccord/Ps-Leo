@@ -54,7 +54,7 @@ function AppContent() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h1 className="text-6xl font-bold text-gray-900 mb-4 animate-pulse">BearGuard</h1>
+          <img src="/Ps-Leo_9-removebg-preview.png" alt="BearGuard" className="w-32 h-32 mx-auto mb-4 animate-pulse" />
           <div className="flex justify-center space-x-2">
             <div className="w-3 h-3 bg-orange-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
             <div className="w-3 h-3 bg-orange-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
@@ -82,7 +82,7 @@ function AppContent() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h1 className="text-6xl font-bold text-gray-900 mb-4 animate-pulse">BearGuard</h1>
+          <img src="/Ps-Leo_9-removebg-preview.png" alt="BearGuard" className="w-32 h-32 mx-auto mb-4 animate-pulse" />
           <div className="flex justify-center space-x-2">
             <div className="w-3 h-3 bg-orange-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
             <div className="w-3 h-3 bg-orange-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>

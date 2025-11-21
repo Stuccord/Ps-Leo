@@ -80,6 +80,10 @@ function AppContent() {
   }
 
   const renderPage = () => {
+    if (currentPage === 'landing') {
+      return <LandingPage onNavigate={setCurrentPage} />;
+    }
+
     switch (currentPage) {
       case 'admin-dashboard':
         return <AdminDashboard />;
@@ -135,6 +139,10 @@ function AppContent() {
         return <ReferralDashboard />;
     }
   };
+
+  if (currentPage === 'landing') {
+    return renderPage();
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">

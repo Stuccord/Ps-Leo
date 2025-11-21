@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, ArrowLeft, Mail, Lock, User, Phone, Building, Eye, EyeOff } from 'lucide-react';
+import { Shield, ArrowLeft, Mail, Lock, User, Phone, Building, Eye, EyeOff, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface SignupProps {
@@ -17,6 +17,7 @@ export default function Signup({ onNavigate }: SignupProps) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -59,9 +60,13 @@ export default function Signup({ onNavigate }: SignupProps) {
       });
 
       if (signUpError) throw signUpError;
+
+      setSuccess(true);
     } catch (err: any) {
       if (err.message.includes('weak_password') || err.message.includes('weak')) {
         setError('Please choose a stronger password (avoid common words, use mix of characters)');
+      } else if (err.message.includes('rate_limit') || err.message.includes('email_send')) {
+        setError('Too many signup attempts. Please wait a moment and try again.');
       } else {
         setError(err.message || 'Failed to create account. Please try again.');
       }
@@ -97,6 +102,15 @@ export default function Signup({ onNavigate }: SignupProps) {
             {error && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
                 {error}
+              </div>
+            )}
+
+            {success && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+                <div className="flex items-center space-x-2">
+                  <Check className="w-5 h-5" />
+                  <span>Account created successfully! A confirmation email has been sent to your inbox.</span>
+                </div>
               </div>
             )}
 

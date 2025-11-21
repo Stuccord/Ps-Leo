@@ -83,7 +83,8 @@ export default function Signup({ onNavigate }: SignupProps) {
         }
 
         if (retries >= maxRetries) {
-          throw new Error('Account created successfully! Please log in to continue.');
+          setSuccess(true);
+          window.location.reload();
         }
       }
     } catch (err: any) {

@@ -81,7 +81,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 src="/Ps-Leo Logo 1o.png"
                 alt="BearGuard Support Services"
                 className="transition-all duration-300 w-auto cursor-pointer"
-                style={{ height: scrolled ? '60px' : '80px' }}
+                style={{ height: scrolled ? '60px' : '250px' }}
                 onClick={() => scrollToSection('home')}
               />
             </div>

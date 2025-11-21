@@ -60,10 +60,31 @@ export default function Signup({ onNavigate }: SignupProps) {
       if (signUpError) throw signUpError;
 
       if (authData.user) {
-        setSuccess(true);
-        setTimeout(() => {
-          onNavigate('dashboard');
-        }, 2500);
+        let retries = 0;
+        const maxRetries = 10;
+
+        while (retries < maxRetries) {
+          const { data: agentData } = await supabase
+            .from('agents')
+            .select('*')
+            .eq('id', authData.user.id)
+            .maybeSingle();
+
+          if (agentData) {
+            setSuccess(true);
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+            break;
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 500));
+          retries++;
+        }
+
+        if (retries >= maxRetries) {
+          throw new Error('Profile creation is taking longer than expected. Please try logging in.');
+        }
       }
     } catch (err: any) {
       if (err.message.includes('weak_password') || err.message.includes('weak')) {

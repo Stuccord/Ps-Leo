@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Heart, TrendingUp, Users, FileCheck, Phone, Mail, MapPin, CheckCircle, ArrowRight, Menu, X, Clock, Award, Headphones, Star, DollarSign, Briefcase, Activity } from 'lucide-react';
+import { Shield, Heart, TrendingUp, Users, FileCheck, Phone, Mail, MapPin, CheckCircle, ArrowRight, Menu, X, Clock, Award, Headphones, Star, DollarSign, Briefcase, Activity, Calendar } from 'lucide-react';
+import AppointmentModal from '../components/AppointmentModal';
 
 interface LandingPageProps {
   onNavigate: (page: string) => void;
@@ -9,6 +10,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -164,11 +166,11 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => setAppointmentModalOpen(true)}
                   className="group px-10 py-5 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-300 font-bold text-xl flex items-center justify-center space-x-2 transform hover:scale-105"
                 >
-                  <span>Get Help Now</span>
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                  <Calendar className="w-6 h-6" />
+                  <span>Book Appointment</span>
                 </button>
                 <button
                   onClick={() => onNavigate('signup')}
@@ -198,11 +200,15 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-3xl opacity-30 blur-2xl group-hover:opacity-40 transition-opacity"></div>
               <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                 <img
-                  src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
-                  alt="Accident victim receiving support and showing positivity"
+                  src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
+                  alt="Professional team ready to help with insurance claims"
                   className="relative w-full h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8 text-white">
+                  <p className="text-2xl font-bold mb-2">Expert Team Ready to Help</p>
+                  <p className="text-lg">Professional support for your insurance claims</p>
+                </div>
               </div>
             </div>
           </div>
@@ -285,8 +291,8 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-600 rounded-3xl opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
               <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
-                alt="Professional African team working together"
+                src="/WhatsApp Image 2025-11-21 at 14.53.39_4041563b.jpg"
+                alt="Professional ready to assist with insurance claims"
                 className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -407,8 +413,8 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-blue-600 rounded-3xl opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
               <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.39_4041563b.jpg"
-                alt="Confident professional ready to help clients"
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
+                alt="Client receiving support and guidance"
                 className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -674,6 +680,11 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           </div>
         </div>
       </footer>
+
+      <AppointmentModal
+        isOpen={appointmentModalOpen}
+        onClose={() => setAppointmentModalOpen(false)}
+      />
     </div>
   );
 }

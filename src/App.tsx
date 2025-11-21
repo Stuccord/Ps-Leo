@@ -71,12 +71,6 @@ function AppContent() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'landing':
-        return <LandingPage onNavigate={setCurrentPage} />;
-      case 'signup':
-        return <Signup onNavigate={setCurrentPage} />;
-      case 'login':
-        return <Login onNavigate={setCurrentPage} />;
       case 'admin-dashboard':
         return <AdminDashboard />;
       case 'agent-management':

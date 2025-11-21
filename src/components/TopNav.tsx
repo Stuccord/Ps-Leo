@@ -5,9 +5,10 @@ import { useAuth } from '../contexts/AuthContext';
 interface TopNavProps {
   onMenuClick: () => void;
   onNavigate: (page: string) => void;
+  onCloseSidebar: () => void;
 }
 
-export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
+export default function TopNav({ onMenuClick, onNavigate, onCloseSidebar }: TopNavProps) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const { agent, signOut } = useAuth();
@@ -29,7 +30,11 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
       <div className="flex items-center space-x-4">
         <div className="relative">
           <button
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => {
+              setShowNotifications(!showNotifications);
+              setShowDropdown(false);
+              onCloseSidebar();
+            }}
             className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <Bell className="w-6 h-6 text-gray-700" />
@@ -108,7 +113,11 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
 
         <div className="relative">
           <button
-            onClick={() => setShowDropdown(!showDropdown)}
+            onClick={() => {
+              setShowDropdown(!showDropdown);
+              setShowNotifications(false);
+              onCloseSidebar();
+            }}
             className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             {agent?.avatar_url ? (

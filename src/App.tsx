@@ -137,7 +137,7 @@ function AppContent() {
       )}
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <TopNav onMenuClick={() => setMobileSidebarOpen(true)} onNavigate={setCurrentPage} />
+        <TopNav onMenuClick={() => setMobileSidebarOpen(true)} onNavigate={setCurrentPage} onCloseSidebar={() => setMobileSidebarOpen(false)} />
         <main className="flex-1 overflow-y-auto p-6">
           <div className="max-w-7xl mx-auto">
             {renderPage()}

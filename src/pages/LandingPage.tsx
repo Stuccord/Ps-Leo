@@ -72,10 +72,10 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-white">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-2xl py-3' : 'bg-white/95 backdrop-blur-md shadow-xl py-4'
+        scrolled ? 'bg-white shadow-2xl' : 'bg-white/95 backdrop-blur-md shadow-xl'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center" style={{ height: '110px' }}>
+          <div className="flex justify-between items-center py-2">
             <div className="flex items-center">
               <img
                 src="/Ps-Leo Logo 1o.png"

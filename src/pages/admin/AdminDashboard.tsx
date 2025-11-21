@@ -41,26 +41,30 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {})
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAdminStats();
-    fetchAgents();
+    fetchAllData();
   }, []);
 
-  const fetchAdminStats = async () => {
+  const fetchAllData = async () => {
     try {
       const currentMonth = new Date().getMonth() + 1;
       const currentYear = new Date().getFullYear();
 
-      const [agentsRes, activeAgentsRes, clientsRes, policiesRes, commissionsRes, claimsRes] = await Promise.all([
-        supabase.from('agents').select('id', { count: 'exact' }),
-        supabase.from('agents').select('id', { count: 'exact' }).eq('is_active', true),
-        supabase.from('clients').select('id', { count: 'exact' }),
-        supabase.from('policies').select('id', { count: 'exact' }).eq('status', 'active'),
+      const [agentsRes, activeAgentsRes, clientsRes, policiesRes, commissionsRes, claimsRes, agentsListRes] = await Promise.all([
+        supabase.from('agents').select('id', { count: 'exact', head: true }),
+        supabase.from('agents').select('id', { count: 'exact', head: true }).eq('is_active', true),
+        supabase.from('clients').select('id', { count: 'exact', head: true }),
+        supabase.from('policies').select('id', { count: 'exact', head: true }).eq('status', 'active'),
         supabase
           .from('commissions')
           .select('amount')
           .eq('month', currentMonth)
           .eq('year', currentYear),
-        supabase.from('claims').select('id', { count: 'exact' }).eq('status', 'pending'),
+        supabase.from('claims').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+        supabase
+          .from('agents')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(10),
       ]);
 
       const totalCommissions = commissionsRes.data?.reduce((sum, c) => sum + parseFloat(c.amount.toString()), 0) || 0;
@@ -73,25 +77,12 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {})
         totalCommissions,
         pendingClaims: claimsRes.count || 0,
       });
+
+      setAgents(agentsListRes.data || []);
     } catch (error) {
-      console.error('Error fetching admin stats:', error);
+      console.error('Error fetching admin data:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchAgents = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('agents')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10);
-
-      if (error) throw error;
-      setAgents(data || []);
-    } catch (error) {
-      console.error('Error fetching agents:', error);
     }
   };
 

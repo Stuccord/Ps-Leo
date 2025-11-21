@@ -91,21 +91,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email,
         password,
         options: {
+          emailRedirectTo: undefined,
           data: {
             full_name: fullName,
             role: role,
+            phone: phone,
+            hospital_affiliation: '',
           },
         },
       });
 
       if (error) throw error;
-
-      if (data.user && phone) {
-        await supabase
-          .from('agents')
-          .update({ phone })
-          .eq('id', data.user.id);
-      }
 
       return { error: null };
     } catch (error) {

@@ -38,7 +38,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
   const stats = [
     { icon: Users, value: '200+', label: 'Clients Helped', color: 'from-orange-500 to-red-500' },
     { icon: DollarSign, value: 'GHC 2M+', label: 'Claims Secured', color: 'from-green-500 to-emerald-500' },
-    { icon: Clock, value: '7-90 Days', label: 'Avg. Processing', color: 'from-blue-500 to-cyan-500' },
+    { icon: Clock, value: '90 Days', label: 'Avg. Processing', color: 'from-blue-500 to-cyan-500' },
     { icon: Star, value: '4.9/5', label: 'Client Rating', color: 'from-yellow-500 to-orange-500' },
   ];
 
@@ -179,7 +179,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-16 max-w-3xl mx-auto">
               <div className="text-center space-y-3">
                 <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                  7-90 Days
+                  90 Days
                 </div>
                 <div className="text-lg text-gray-600 font-semibold">Average Processing Time</div>
               </div>
@@ -216,7 +216,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <p className="text-2xl font-bold mb-1">Fast Processing</p>
-                <p className="text-sm text-white/90">Claims in 7-90 days average</p>
+                <p className="text-sm text-white/90">Claims in 90 days average</p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-3xl shadow-xl group">

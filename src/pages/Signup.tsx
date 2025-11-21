@@ -17,7 +17,6 @@ export default function Signup({ onNavigate }: SignupProps) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -60,33 +59,6 @@ export default function Signup({ onNavigate }: SignupProps) {
       });
 
       if (signUpError) throw signUpError;
-
-      if (authData.user) {
-        let retries = 0;
-        const maxRetries = 10;
-
-        while (retries < maxRetries) {
-          const { data: agentData } = await supabase
-            .from('agents')
-            .select('*')
-            .eq('id', authData.user.id)
-            .maybeSingle();
-
-          if (agentData) {
-            setSuccess(true);
-            window.location.reload();
-            break;
-          }
-
-          await new Promise(resolve => setTimeout(resolve, 500));
-          retries++;
-        }
-
-        if (retries >= maxRetries) {
-          setSuccess(true);
-          window.location.reload();
-        }
-      }
     } catch (err: any) {
       if (err.message.includes('weak_password') || err.message.includes('weak')) {
         setError('Please choose a stronger password (avoid common words, use mix of characters)');
@@ -97,23 +69,6 @@ export default function Signup({ onNavigate }: SignupProps) {
       setLoading(false);
     }
   };
-
-  if (success) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-8 h-8 text-green-600" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to BearGuard!</h2>
-          <p className="text-gray-600 mb-4">
-            Setting up your dashboard...
-          </p>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 mx-auto"></div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white">

@@ -58,7 +58,7 @@ function AppContent() {
     );
   }
 
-  if (!user || !agent) {
+  if (!user) {
     if (currentPage === 'landing') {
       return <LandingPage onNavigate={setCurrentPage} />;
     }
@@ -69,6 +69,14 @@ function AppContent() {
       return <Login onNavigate={setCurrentPage} />;
     }
     return <LandingPage onNavigate={setCurrentPage} />;
+  }
+
+  if (!agent) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-600"></div>
+      </div>
+    );
   }
 
   const renderPage = () => {

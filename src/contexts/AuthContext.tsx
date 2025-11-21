@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const fetchAgentProfile = async (userId: string) => {
+  const fetchAgentProfile = async (userId: string, retries = 0) => {
     try {
       const { data, error } = await supabase
         .from('agents')
@@ -52,6 +52,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .maybeSingle();
 
       if (error) throw error;
+
+      if (!data && retries < 10) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        return fetchAgentProfile(userId, retries + 1);
+      }
+
       setAgent(data);
     } catch (error) {
       console.error('Error fetching agent profile:', error);

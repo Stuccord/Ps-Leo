@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Heart, TrendingUp, Users, FileCheck, Phone, Mail, MapPin, CheckCircle, ArrowRight, Menu, X } from 'lucide-react';
+import { Shield, Heart, TrendingUp, Users, FileCheck, Phone, Mail, MapPin, CheckCircle, ArrowRight, Menu, X, Clock, Award, Headphones } from 'lucide-react';
 
 interface LandingPageProps {
   onNavigate: (page: string) => void;
@@ -18,172 +18,190 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-24">
             <div className="flex items-center">
               <img
                 src="/Untitled-2 (12).png"
                 alt="BearGuard Support Services"
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
             </div>
 
-            <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium">About</button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium">Services</button>
-              <button onClick={() => scrollToSection('why-us')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium">Why Us</button>
-              <button onClick={() => scrollToSection('referral')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium">Referral Network</button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium">Contact</button>
-              <button onClick={() => onNavigate('login')} className="px-4 py-2 text-orange-600 hover:text-orange-700 font-semibold transition-colors">Login</button>
-              <button onClick={() => onNavigate('signup')} className="px-6 py-2.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all hover:shadow-lg font-semibold">Sign Up</button>
+            <div className="hidden lg:flex items-center space-x-8">
+              <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg">Home</button>
+              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg">About</button>
+              <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg">Services</button>
+              <button onClick={() => scrollToSection('why-us')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg">Why Us</button>
+              <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg">Contact</button>
+              <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-600 hover:text-orange-700 font-semibold transition-colors text-lg">Login</button>
+              <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl font-semibold text-lg">Join Network</button>
             </div>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2">
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2">
+              {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
             </button>
           </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white">
-            <div className="px-4 py-3 space-y-3">
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">About</button>
-              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">Services</button>
-              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">Why Us</button>
-              <button onClick={() => scrollToSection('referral')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">Referral Network</button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">Contact</button>
-              <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-2 text-orange-600 hover:bg-orange-50 rounded-lg font-medium">Login</button>
-              <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-medium">Sign Up</button>
+          <div className="lg:hidden border-t border-gray-200 bg-white shadow-lg">
+            <div className="px-4 py-4 space-y-3">
+              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg text-lg">Home</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg text-lg">About</button>
+              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg text-lg">Services</button>
+              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg text-lg">Why Us</button>
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 rounded-lg text-lg">Contact</button>
+              <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-600 hover:bg-orange-50 rounded-lg font-medium text-lg">Login</button>
+              <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-medium text-lg">Join Network</button>
             </div>
           </div>
         )}
       </nav>
 
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 via-white to-blue-50 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-600 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-6">
-                Ghana's Trusted Claims Support Service
+      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-orange-50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="inline-block px-5 py-2 bg-orange-600 text-white rounded-full text-sm font-bold mb-8 shadow-lg">
+                🛡️ Ghana's Trusted Insurance Claims Partner
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Had an accident? <br />
-                <span className="text-orange-600">Don't suffer twice</span>
+              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
+                Had an accident?
+                <span className="block text-orange-600 mt-2">Don't suffer twice</span>
               </h1>
-              <p className="text-2xl font-semibold text-gray-700 mb-6">
+              <p className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
                 Get fast, stress-free insurance claims
               </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                BearGuard Support Services helps accident victims across Ghana secure the compensation they rightfully deserve—fast, stress-free, and with compassion.
+              <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+                BearGuard Support Services helps accident victims across Ghana secure the compensation they rightfully deserve—without the hassle, stress, or delay.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all hover:shadow-xl font-semibold text-lg flex items-center justify-center space-x-2 transform hover:scale-105"
+                  className="px-10 py-5 bg-orange-600 text-white rounded-xl hover:bg-orange-700 transition-all shadow-2xl hover:shadow-orange-200 font-bold text-xl flex items-center justify-center space-x-2"
                 >
                   <span>Get Help Now</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-6 h-6" />
                 </button>
                 <button
                   onClick={() => onNavigate('signup')}
-                  className="px-8 py-4 bg-white text-orange-600 border-2 border-orange-600 rounded-lg hover:bg-orange-50 transition-all font-semibold text-lg"
+                  className="px-10 py-5 bg-white text-orange-600 border-3 border-orange-600 rounded-xl hover:bg-orange-50 transition-all shadow-xl font-bold text-xl"
                 >
                   Become a Partner
                 </button>
               </div>
-              <div className="flex items-center gap-6 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>No upfront costs</span>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="bg-white p-4 rounded-xl shadow-lg">
+                  <div className="text-3xl font-bold text-orange-600">GHC 200</div>
+                  <div className="text-sm text-gray-600 mt-1">Per Referral</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Fast processing</span>
+                <div className="bg-white p-4 rounded-xl shadow-lg">
+                  <div className="text-3xl font-bold text-orange-600">Fast</div>
+                  <div className="text-sm text-gray-600 mt-1">Processing</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Expert support</span>
+                <div className="bg-white p-4 rounded-xl shadow-lg">
+                  <div className="text-3xl font-bold text-orange-600">100%</div>
+                  <div className="text-sm text-gray-600 mt-1">Support</div>
                 </div>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 rounded-3xl transform rotate-3"></div>
+            <div className="order-1 lg:order-2 relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-3xl opacity-20 blur-2xl"></div>
               <img
-                src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Healthcare professional helping patient in Ghana"
-                className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
+                alt="Accident victim getting support"
+                className="relative rounded-3xl shadow-2xl w-full h-[600px] object-cover"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-orange-600 to-orange-700">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              We fight for what you deserve.
-            </h2>
-            <p className="text-xl text-orange-100">
-              From gathering documents to dealing with insurance companies—we handle the difficult parts so you can focus on healing.
-            </p>
+      <section className="py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div className="flex flex-col items-center">
+              <Clock className="w-12 h-12 mb-3" />
+              <h3 className="text-xl font-bold mb-2">No Upfront Costs</h3>
+              <p className="text-orange-100">Pay only after compensation</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Award className="w-12 h-12 mb-3" />
+              <h3 className="text-xl font-bold mb-2">Expert Team</h3>
+              <p className="text-orange-100">Trained professionals nationwide</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Headphones className="w-12 h-12 mb-3" />
+              <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
+              <p className="text-orange-100">Always here when you need us</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About BearGuard</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">About BearGuard</h2>
+            <p className="text-2xl text-gray-600 max-w-4xl mx-auto">
               Ghana's leading accident claims facilitation and advocacy agency
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             <div>
               <img
-                src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Professional African team"
-                className="rounded-2xl shadow-xl w-full h-[400px] object-cover"
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
+                alt="Professional African team working together"
+                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
               />
             </div>
 
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">Who We Are</h3>
-              <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-                BearGuard Support Services is an accident claims facilitation and advocacy agency dedicated to helping victims of road accidents secure fair and timely insurance compensation. We operate across Ghana with a growing network of hospital partners, legal experts, and field representatives.
+              <h3 className="text-4xl font-bold text-gray-900 mb-6">Who We Are</h3>
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                BearGuard Support Services is Ghana's premier accident claims facilitation and advocacy agency. We're dedicated to helping road accident victims secure fair and timely insurance compensation.
               </p>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                Founded on integrity, care, and results, BearGuard exists because too many accident victims face stress, confusion, and delays when navigating insurance claims. We step in as a shield—protecting your rights and ensuring no victim is left to struggle alone.
+              <p className="text-xl text-gray-700 leading-relaxed mb-8">
+                With a growing network of hospital partners, legal experts, and field representatives across Ghana, we step in as your shield—protecting your rights and ensuring no victim struggles alone.
               </p>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-7 h-7 text-orange-600 flex-shrink-0 mt-1" />
+                  <p className="text-lg text-gray-700">Founded on integrity, care, and results</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-7 h-7 text-orange-600 flex-shrink-0 mt-1" />
+                  <p className="text-lg text-gray-700">Nationwide hospital and legal network</p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-7 h-7 text-orange-600 flex-shrink-0 mt-1" />
+                  <p className="text-lg text-gray-700">Proven track record of successful claims</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl border border-orange-200">
-              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-white" />
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-10 rounded-3xl text-white shadow-2xl">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6">
+                <Shield className="w-10 h-10 text-orange-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-4">Our Mission</h3>
+              <p className="text-xl text-orange-50 leading-relaxed">
                 To deliver fast, reliable, and compassionate support to accident victims by simplifying insurance claims, promoting fairness, and guiding clients back to stability.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
-                <Heart className="w-6 h-6 text-white" />
+            <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-10 rounded-3xl text-white shadow-2xl">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6">
+                <Heart className="w-10 h-10 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-4">Our Vision</h3>
+              <p className="text-xl text-blue-50 leading-relaxed">
                 A Ghana where every accident victim receives the compensation and support they deserve—without stress, delay, or intimidation.
               </p>
             </div>
@@ -191,316 +209,306 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">What We Do</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We provide end-to-end accident claims support tailored to Ghana's unique insurance landscape
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">What We Do</h2>
+            <p className="text-2xl text-gray-600 max-w-4xl mx-auto">
+              Comprehensive end-to-end accident claims support tailored to Ghana's insurance landscape
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-                <FileCheck className="w-8 h-8 text-orange-600" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                <FileCheck className="w-10 h-10 text-orange-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Insurance Claims Processing</h3>
-              <p className="text-gray-600">Complete assistance with all paperwork and submissions</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Insurance Claims Processing</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">Complete assistance with all paperwork, documentation, and submissions to insurance companies</p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Shield className="w-8 h-8 text-blue-600" />
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <Shield className="w-10 h-10 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Police Reports Coordination</h3>
-              <p className="text-gray-600">We handle all communication with law enforcement</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Police Reports Coordination</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">We handle all communication and follow-ups with law enforcement agencies</p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                <Heart className="w-8 h-8 text-green-600" />
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <Heart className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Medical Reports Facilitation</h3>
-              <p className="text-gray-600">Fast-track your medical documentation</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Medical Reports Facilitation</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">Fast-track your medical documentation through our hospital network</p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                <TrendingUp className="w-8 h-8 text-purple-600" />
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <TrendingUp className="w-10 h-10 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Claim Calculations & Guidance</h3>
-              <p className="text-gray-600">Maximize your rightful compensation</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Claim Calculations</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">Expert guidance to maximize your rightful compensation amount</p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
-                <Users className="w-8 h-8 text-yellow-600" />
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                <Users className="w-10 h-10 text-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Insurance Company Follow-ups</h3>
-              <p className="text-gray-600">We persist until you get what you deserve</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Insurance Follow-ups</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">Persistent advocacy until you receive what you deserve</p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4">
-                <Heart className="w-8 h-8 text-red-600" />
+            <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all">
+              <div className="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                <Heart className="w-10 h-10 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Holistic Recovery Support</h3>
-              <p className="text-gray-600">Emotional, financial, and physical guidance</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Recovery Support</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">Emotional, financial, and physical recovery guidance</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-orange-600 to-orange-700 p-8 rounded-2xl shadow-xl text-center text-white">
-            <p className="text-xl md:text-2xl font-semibold">
-              Whether you were a pedestrian, passenger, driver, or motor rider—BearGuard is here for you
+          <div className="bg-gradient-to-r from-orange-600 to-orange-700 p-12 rounded-3xl shadow-2xl text-center text-white">
+            <p className="text-3xl font-bold">
+              Whether you're a pedestrian, passenger, driver, or motor rider—BearGuard fights for you
             </p>
           </div>
         </div>
       </section>
 
-      <section id="why-us" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="why-us" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Why Choose BearGuard</h2>
-            <p className="text-xl text-gray-600">The trusted choice for accident victims across Ghana</p>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Why Choose BearGuard</h2>
+            <p className="text-2xl text-gray-600">The trusted choice for accident victims across Ghana</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
             <div>
               <img
-                src="https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Compassionate healthcare support in Ghana"
-                className="rounded-2xl shadow-xl w-full h-[400px] object-cover"
+                src="/WhatsApp Image 2025-11-21 at 14.53.39_4041563b.jpg"
+                alt="Confident professional ready to help"
+                className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
               />
             </div>
 
-            <div className="grid gap-4">
-              <div className="flex items-start space-x-4 bg-gray-50 p-4 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4 bg-orange-50 p-6 rounded-2xl border-2 border-orange-100">
+                <CheckCircle className="w-8 h-8 text-orange-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1 text-lg">Fast & stress-free claims</h3>
-                  <p className="text-gray-600">We expedite the entire process</p>
+                  <h3 className="font-bold text-gray-900 mb-2 text-2xl">Fast & Stress-Free Claims</h3>
+                  <p className="text-gray-600 text-lg">We expedite the entire process so you can focus on recovery</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 bg-gray-50 p-4 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 bg-orange-50 p-6 rounded-2xl border-2 border-orange-100">
+                <CheckCircle className="w-8 h-8 text-orange-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1 text-lg">No upfront costs</h3>
-                  <p className="text-gray-600">For victims who qualify</p>
+                  <h3 className="font-bold text-gray-900 mb-2 text-2xl">No Upfront Costs</h3>
+                  <p className="text-gray-600 text-lg">For qualifying victims—you only pay after receiving compensation</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 bg-gray-50 p-4 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 bg-orange-50 p-6 rounded-2xl border-2 border-orange-100">
+                <CheckCircle className="w-8 h-8 text-orange-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1 text-lg">Trusted hospital network</h3>
-                  <p className="text-gray-600">Partnerships across Ghana</p>
+                  <h3 className="font-bold text-gray-900 mb-2 text-2xl">Trusted Hospital Network</h3>
+                  <p className="text-gray-600 text-lg">Strategic partnerships with hospitals across Ghana</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 bg-gray-50 p-4 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 bg-orange-50 p-6 rounded-2xl border-2 border-orange-100">
+                <CheckCircle className="w-8 h-8 text-orange-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1 text-lg">Transparent processes</h3>
-                  <p className="text-gray-600">No hidden charges or surprises</p>
+                  <h3 className="font-bold text-gray-900 mb-2 text-2xl">Transparent Process</h3>
+                  <p className="text-gray-600 text-lg">No hidden charges or surprises—complete clarity</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 bg-gray-50 p-4 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 bg-orange-50 p-6 rounded-2xl border-2 border-orange-100">
+                <CheckCircle className="w-8 h-8 text-orange-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1 text-lg">Pay after compensation</h3>
-                  <p className="text-gray-600">You only pay when you get paid</p>
+                  <h3 className="font-bold text-gray-900 mb-2 text-2xl">Compassionate Support</h3>
+                  <p className="text-gray-600 text-lg">Every client is treated like family throughout the journey</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-10 rounded-2xl text-center border-2 border-orange-200">
-            <p className="text-2xl md:text-3xl font-bold text-gray-900">
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-12 rounded-3xl text-center border-3 border-orange-200 shadow-xl">
+            <p className="text-4xl font-bold text-gray-900">
               At BearGuard, every client is treated like family
             </p>
           </div>
         </div>
       </section>
 
-      <section id="referral" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-600 to-orange-800 text-white relative overflow-hidden">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-600 via-orange-700 to-orange-800 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-6">
-                Referral Partner Program
+              <div className="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-lg font-bold mb-8 shadow-lg">
+                💰 Referral Partner Program
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Become a BearGuard Referral Partner</h2>
-              <p className="text-xl mb-8 text-orange-100 leading-relaxed">
-                Doctors, nurses, hospital staff, and community leaders can now earn monthly commissions for referring accident victims who need help.
+              <h2 className="text-5xl md:text-6xl font-bold mb-8">Earn While Helping Others</h2>
+              <p className="text-2xl mb-10 text-orange-50 leading-relaxed">
+                Doctors, nurses, hospital staff, and community leaders can now earn monthly commissions for referring accident victims who need our help.
               </p>
 
-              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl mb-8 border border-white/20">
-                <h3 className="text-3xl font-bold mb-4">Earn While Helping Others</h3>
+              <div className="bg-white/15 backdrop-blur-sm p-10 rounded-3xl mb-10 border-2 border-white/30 shadow-2xl">
+                <h3 className="text-4xl font-bold mb-4">GHC 200 Per Successful Referral</h3>
                 <p className="text-xl text-orange-100">
-                  Every successful referral earns you <span className="font-bold text-2xl text-white">GHC 200</span> commission—paid monthly through our secure system.
+                  Join our trusted network and receive monthly payments through our secure system. Make a difference while earning steady income.
                 </p>
               </div>
 
               <button
                 onClick={() => onNavigate('signup')}
-                className="px-10 py-4 bg-white text-orange-600 rounded-lg hover:bg-gray-100 transition-all hover:shadow-2xl font-bold text-lg inline-flex items-center space-x-2 transform hover:scale-105"
+                className="px-12 py-5 bg-white text-orange-600 rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-white/50 font-bold text-2xl inline-flex items-center space-x-3"
               >
-                <span>Join Our Referral Network</span>
-                <ArrowRight className="w-5 h-5" />
+                <span>Join Our Network Today</span>
+                <ArrowRight className="w-7 h-7" />
               </button>
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-white to-orange-200 rounded-3xl transform -rotate-3"></div>
+              <div className="absolute -inset-6 bg-gradient-to-r from-white to-orange-200 rounded-3xl transform rotate-3 opacity-50"></div>
               <img
-                src="https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="African healthcare professionals"
-                className="relative rounded-3xl shadow-2xl w-full h-[450px] object-cover"
+                src="/WhatsApp Image 2025-11-21 at 14.53.39_d63d639e.jpg"
+                alt="Patient consultation with healthcare professional"
+                className="relative rounded-3xl shadow-2xl w-full h-[550px] object-cover"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600">Your journey from accident to compensation in 7 simple steps</p>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Real Stories from Ghana</h2>
+            <p className="text-2xl text-gray-600">Hear from accident victims we've helped recover their rightful compensation</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { num: 1, title: 'Contact BearGuard', desc: 'Reach out via phone or WhatsApp' },
-              { num: 2, title: 'We verify your case', desc: 'Quick assessment of your accident' },
-              { num: 3, title: 'Documents secured', desc: 'Police and medical reports obtained' },
-              { num: 4, title: 'Claim calculated', desc: 'We determine fair compensation' },
-              { num: 5, title: 'Submission', desc: 'Documents sent to insurance company' },
-              { num: 6, title: 'We fight for you', desc: 'Persistent follow-up for maximum payout' },
-              { num: 7, title: 'You get paid', desc: 'Fast compensation delivery' },
-            ].map((step) => (
-              <div key={step.num} className="text-center bg-gray-50 p-6 rounded-2xl hover:bg-orange-50 transition-colors">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-                  {step.num}
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">{step.title}</h3>
-                <p className="text-gray-600 text-sm">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Real Stories, Real Results</h2>
-            <p className="text-xl text-gray-600">Hear from Ghanaians we've helped</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="bg-white p-10 rounded-3xl shadow-xl">
+              <div className="flex items-center gap-6 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                   Y
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">Yovi</p>
-                  <p className="text-sm text-gray-500">Accident Victim</p>
+                  <p className="font-bold text-gray-900 text-2xl">Yovi</p>
+                  <p className="text-lg text-gray-500">Accident Victim, Accra</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-lg leading-relaxed">
-                "I didn't even know insurance could pay. A doctor referred me, and BearGuard handled everything. I'm grateful."
+              <p className="text-gray-700 text-xl leading-relaxed italic">
+                "I didn't even know insurance could pay for my treatment. A doctor at the hospital referred me to BearGuard, and they handled everything. I'm so grateful!"
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+            <div className="bg-white p-10 rounded-3xl shadow-xl">
+              <div className="flex items-center gap-6 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                   A
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">Abraham</p>
-                  <p className="text-sm text-gray-500">Recovered Patient</p>
+                  <p className="font-bold text-gray-900 text-2xl">Abraham</p>
+                  <p className="text-lg text-gray-500">Recovered Patient, Kumasi</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-lg leading-relaxed">
-                "I had no money for surgery. Within weeks, my compensation was paid. BearGuard saved my life."
+              <p className="text-gray-700 text-xl leading-relaxed italic">
+                "I had no money for surgery after my accident. Within weeks, BearGuard secured my compensation and I got the treatment I needed. They saved my life."
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+            <div className="bg-white p-10 rounded-3xl shadow-xl">
+              <div className="flex items-center gap-6 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                   J
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">Jonathan</p>
-                  <p className="text-sm text-gray-500">Satisfied Client</p>
+                  <p className="font-bold text-gray-900 text-2xl">Jonathan</p>
+                  <p className="text-lg text-gray-500">Satisfied Client, Takoradi</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-lg leading-relaxed">
-                "Insurance delayed me for over a year. BearGuard stepped in, and within a week I was paid. Incredible!"
+              <p className="text-gray-700 text-xl leading-relaxed italic">
+                "The insurance company delayed me for over a year. BearGuard stepped in with their expertise, and within a week, I was paid. Incredible service!"
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+            <div className="bg-white p-10 rounded-3xl shadow-xl">
+              <div className="flex items-center gap-6 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                   S
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">Seraphine</p>
-                  <p className="text-sm text-gray-500">Grateful Client</p>
+                  <p className="font-bold text-gray-900 text-2xl">Seraphine</p>
+                  <p className="text-lg text-gray-500">Grateful Client, Tamale</p>
                 </div>
               </div>
-              <p className="text-gray-700 italic text-lg leading-relaxed">
-                "The police stressed me for a report and I couldn't afford a medical report. BearGuard saved me."
+              <p className="text-gray-700 text-xl leading-relaxed italic">
+                "The police stressed me for a report, and I couldn't afford a medical report. BearGuard handled all of that and more. God bless them!"
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-600">We're here to help you 24/7</p>
+      <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Get In Touch</h2>
+            <p className="text-2xl text-gray-600">We're here to help you 24/7—reach out anytime</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl text-center hover:shadow-xl transition-shadow border border-orange-200">
-              <div className="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-white" />
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-10 rounded-3xl text-center text-white shadow-2xl hover:shadow-orange-200 transition-all">
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                <Phone className="w-10 h-10 text-orange-600" />
               </div>
-              <h3 className="font-bold text-gray-900 mb-3 text-lg">Call / WhatsApp</h3>
-              <p className="text-xl font-semibold text-orange-600">050 282 9901</p>
+              <h3 className="font-bold mb-4 text-2xl">Call / WhatsApp</h3>
+              <p className="text-3xl font-bold">050 282 9901</p>
+              <p className="text-orange-100 mt-2 text-lg">Available 24/7</p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl text-center hover:shadow-xl transition-shadow border border-blue-200">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-white" />
+            <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-10 rounded-3xl text-center text-white shadow-2xl hover:shadow-blue-200 transition-all">
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-10 h-10 text-blue-600" />
               </div>
-              <h3 className="font-bold text-gray-900 mb-3 text-lg">Email Us</h3>
-              <p className="text-lg font-semibold text-blue-600 break-all">bearguard25@gmail.com</p>
+              <h3 className="font-bold mb-4 text-2xl">Email Us</h3>
+              <p className="text-xl font-bold break-all">bearguard25@gmail.com</p>
+              <p className="text-blue-100 mt-2 text-lg">Quick response guaranteed</p>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl text-center hover:shadow-xl transition-shadow border border-green-200">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-white" />
+            <div className="bg-gradient-to-br from-green-500 to-green-600 p-10 rounded-3xl text-center text-white shadow-2xl hover:shadow-green-200 transition-all">
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                <MapPin className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="font-bold text-gray-900 mb-3 text-lg">Location</h3>
-              <p className="text-xl font-semibold text-green-600">Ghana</p>
+              <h3 className="font-bold mb-4 text-2xl">Location</h3>
+              <p className="text-3xl font-bold">Ghana</p>
+              <p className="text-green-100 mt-2 text-lg">Nationwide coverage</p>
             </div>
+          </div>
+
+          <div className="mt-16 bg-gradient-to-r from-orange-50 to-orange-100 p-12 rounded-3xl text-center border-2 border-orange-200">
+            <img
+              src="/WhatsApp Image 2025-11-21 at 14.53.39_fca7de1a.jpg"
+              alt="Patient receiving guidance from healthcare professional"
+              className="w-full max-w-3xl mx-auto rounded-2xl shadow-2xl mb-8 h-[400px] object-cover"
+            />
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">Ready to Get Started?</h3>
+            <p className="text-2xl text-gray-700 mb-8">Let us fight for the compensation you deserve</p>
+            <button
+              onClick={() => scrollToSection('home')}
+              className="px-12 py-5 bg-orange-600 text-white rounded-xl hover:bg-orange-700 transition-all shadow-2xl font-bold text-2xl"
+            >
+              Contact Us Now
+            </button>
           </div>
         </div>
       </section>
@@ -510,42 +518,44 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <img
-                src="/Untitled-1 (5).png"
+                src="/Untitled-2 (12).png"
                 alt="BearGuard Support Services"
-                className="h-16 w-auto mb-4 brightness-0 invert"
+                className="h-20 w-auto mb-4 brightness-0 invert"
               />
-              <p className="text-gray-400 text-lg">We fight for what you deserve</p>
+              <p className="text-gray-400 text-xl leading-relaxed">We fight for what you deserve</p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 text-lg">Quick Links</h3>
+              <h3 className="font-bold mb-6 text-2xl">Quick Links</h3>
               <div className="space-y-3">
-                <button onClick={() => scrollToSection('about')} className="block text-gray-400 hover:text-white transition-colors">About Us</button>
-                <button onClick={() => scrollToSection('services')} className="block text-gray-400 hover:text-white transition-colors">Services</button>
-                <button onClick={() => scrollToSection('why-us')} className="block text-gray-400 hover:text-white transition-colors">Why Choose Us</button>
+                <button onClick={() => scrollToSection('home')} className="block text-gray-400 hover:text-white transition-colors text-lg">Home</button>
+                <button onClick={() => scrollToSection('about')} className="block text-gray-400 hover:text-white transition-colors text-lg">About Us</button>
+                <button onClick={() => scrollToSection('services')} className="block text-gray-400 hover:text-white transition-colors text-lg">Services</button>
+                <button onClick={() => scrollToSection('why-us')} className="block text-gray-400 hover:text-white transition-colors text-lg">Why Choose Us</button>
               </div>
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 text-lg">For Partners</h3>
+              <h3 className="font-bold mb-6 text-2xl">For Partners</h3>
               <div className="space-y-3">
-                <button onClick={() => onNavigate('signup')} className="block text-gray-400 hover:text-white transition-colors">Referral Portal</button>
-                <button onClick={() => onNavigate('signup')} className="block text-gray-400 hover:text-white transition-colors">Become a Partner</button>
+                <button onClick={() => onNavigate('signup')} className="block text-gray-400 hover:text-white transition-colors text-lg">Referral Portal</button>
+                <button onClick={() => onNavigate('signup')} className="block text-gray-400 hover:text-white transition-colors text-lg">Become a Partner</button>
+                <button onClick={() => onNavigate('login')} className="block text-gray-400 hover:text-white transition-colors text-lg">Partner Login</button>
               </div>
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 text-lg">Contact</h3>
-              <div className="space-y-3 text-gray-400">
-                <p>050 282 9901</p>
-                <p>bearguard25@gmail.com</p>
-                <p>Ghana</p>
+              <h3 className="font-bold mb-6 text-2xl">Contact</h3>
+              <div className="space-y-3 text-gray-400 text-lg">
+                <p>📞 050 282 9901</p>
+                <p>✉️ bearguard25@gmail.com</p>
+                <p>📍 Ghana (Nationwide)</p>
               </div>
             </div>
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 BearGuard Support Services. All rights reserved.</p>
+            <p className="text-lg">&copy; 2025 BearGuard Support Services. All rights reserved. We fight for what you deserve.</p>
           </div>
         </div>
       </footer>

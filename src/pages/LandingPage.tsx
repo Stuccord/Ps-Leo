@@ -527,8 +527,8 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-6 bg-gradient-to-r from-white to-orange-200 rounded-3xl transform rotate-3 opacity-30 group-hover:opacity-40 transition-opacity"></div>
               <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.39_d63d639e.jpg"
-                alt="Patient consultation with healthcare professional"
+                src="/Ps-Rev.jpg"
+                alt="Professional healthcare partner"
                 className="relative rounded-3xl shadow-2xl w-full h-[550px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
             </div>

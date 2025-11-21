@@ -9,6 +9,7 @@ interface TopNavProps {
 
 export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const { agent, signOut } = useAuth();
 
   return (
@@ -26,10 +27,60 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
       </div>
 
       <div className="flex items-center space-x-4">
-        <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <Bell className="w-6 h-6 text-gray-700" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setShowNotifications(!showNotifications)}
+            className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <Bell className="w-6 h-6 text-gray-700" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+
+          {showNotifications && (
+            <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto">
+              <div className="p-4 border-b border-gray-200">
+                <h3 className="font-semibold text-gray-900">Notifications</h3>
+              </div>
+              <div className="divide-y divide-gray-100">
+                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">New referral approved</p>
+                      <p className="text-xs text-gray-500 mt-1">Your referral for John Doe has been approved</p>
+                      <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">Commission earned</p>
+                      <p className="text-xs text-gray-500 mt-1">You earned GHS 150.00 in commission</p>
+                      <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">Policy expiring soon</p>
+                      <p className="text-xs text-gray-500 mt-1">Client policy expires in 30 days</p>
+                      <p className="text-xs text-gray-400 mt-1">1 day ago</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-3 border-t border-gray-200 text-center">
+                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  View all notifications
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="relative">
           <button

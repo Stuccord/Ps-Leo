@@ -76,11 +76,11 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24">
-            <div className="flex items-center bg-white p-3 rounded-xl shadow-md">
+            <div className="flex items-center bg-white px-4 py-2 rounded-xl shadow-md">
               <img
-                src="/Untitled-2 (12).png"
+                src="/Untitled-1 (5).png"
                 alt="BearGuard Support Services"
-                className={`transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'} w-auto cursor-pointer drop-shadow-lg`}
+                className={`transition-all duration-300 ${scrolled ? 'h-12' : 'h-14'} w-auto cursor-pointer`}
                 onClick={() => scrollToSection('home')}
               />
             </div>
@@ -631,7 +631,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <img
                 src="/Untitled-2 (12).png"
                 alt="BearGuard Support Services"
-                className="h-20 w-auto mb-4 brightness-0 invert"
+                className="h-16 w-auto mb-4"
               />
               <p className="text-gray-400 text-xl leading-relaxed mb-4">We fight for what you deserve</p>
               <div className="flex space-x-4">

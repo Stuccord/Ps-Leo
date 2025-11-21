@@ -132,19 +132,14 @@ export default function NewReferral() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
               >
                 <option value="">Select Hospital</option>
-                <option value="37 Military Hospital">37 Military Hospital</option>
                 <option value="Akuse Government Hospital">Akuse Government Hospital</option>
                 <option value="Eastern Regional Hospital">Eastern Regional Hospital</option>
-                <option value="Greater Accra Regional Hospital">Greater Accra Regional Hospital</option>
                 <option value="Kade Government Hospital">Kade Government Hospital</option>
-                <option value="Korle Bu Teaching Hospital">Korle Bu Teaching Hospital</option>
                 <option value="Kwahu Government Hospital">Kwahu Government Hospital</option>
                 <option value="New Abirem Government Hospital">New Abirem Government Hospital</option>
                 <option value="Nsawam Government Hospital">Nsawam Government Hospital</option>
-                <option value="Ridge Hospital">Ridge Hospital</option>
                 <option value="St Joseph's Orthopaedic Hospital">St Joseph's Orthopaedic Hospital</option>
                 <option value="Suhum Government Hospital">Suhum Government Hospital</option>
-                <option value="Tema General Hospital">Tema General Hospital</option>
                 <option value="Tetteh Quarshie Memorial Hospital">Tetteh Quarshie Memorial Hospital</option>
                 <option value="Volta River Authority Hospital">Volta River Authority Hospital</option>
                 <option value="Other">Other</option>

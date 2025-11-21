@@ -28,8 +28,17 @@ export default function Signup({ onNavigate }: SignupProps) {
       return;
     }
 
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      return;
+    }
+
+    const hasUpperCase = /[A-Z]/.test(formData.password);
+    const hasLowerCase = /[a-z]/.test(formData.password);
+    const hasNumber = /[0-9]/.test(formData.password);
+
+    if (!hasUpperCase || !hasLowerCase || !hasNumber) {
+      setError('Password must contain uppercase, lowercase, and number');
       return;
     }
 
@@ -57,7 +66,11 @@ export default function Signup({ onNavigate }: SignupProps) {
         }, 2000);
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to create account. Please try again.');
+      if (err.message.includes('weak_password') || err.message.includes('weak')) {
+        setError('Please choose a stronger password (avoid common words, use mix of characters)');
+      } else {
+        setError(err.message || 'Failed to create account. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -193,6 +206,9 @@ export default function Signup({ onNavigate }: SignupProps) {
                     placeholder="••••••••"
                   />
                 </div>
+                <p className="mt-1 text-xs text-gray-500">
+                  Must be 8+ characters with uppercase, lowercase, and number
+                </p>
               </div>
 
               <div>

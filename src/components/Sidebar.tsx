@@ -16,7 +16,8 @@ import {
   Download,
   MessageSquare,
   Shield,
-  Trophy
+  Trophy,
+  Wallet
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -32,6 +33,7 @@ const agentMenuItems = [
   { id: 'new-referral', label: 'New Referral', icon: UserPlus },
   { id: 'pending-referrals', label: 'Pending Referrals', icon: Clock },
   { id: 'completed-referrals', label: 'Completed Referrals', icon: CheckCircle },
+  { id: 'withdrawals', label: 'Withdrawals', icon: Wallet },
   { id: 'documents', label: 'Documents', icon: Download },
   { id: 'support-tickets', label: 'Support / Complaints', icon: MessageSquare },
   { id: 'terms-policies', label: 'Terms & Policies', icon: Shield },
@@ -52,6 +54,7 @@ const adminMenuItems = [
   { id: 'admin-dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'agent-management', label: 'Agent Management', icon: Users },
   { id: 'referral-management', label: 'Referral Management', icon: ClipboardList },
+  { id: 'withdrawal-processing', label: 'Withdrawal Processing', icon: Wallet },
   { id: 'documents', label: 'Documents', icon: Download },
   { id: 'support-tickets', label: 'Support Tickets', icon: MessageSquare },
   { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },

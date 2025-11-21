@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AgentManagement from './pages/admin/AgentManagement';
 import ReferralManagement from './pages/admin/ReferralManagement';
+import WithdrawalProcessing from './pages/admin/WithdrawalProcessing';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import TeamOverview from './pages/manager/TeamOverview';
 import ReferralDashboard from './pages/ReferralDashboard';
@@ -25,6 +26,7 @@ import Documents from './pages/Documents';
 import SupportTickets from './pages/SupportTickets';
 import TermsPolicies from './pages/TermsPolicies';
 import Leaderboard from './pages/Leaderboard';
+import Withdrawals from './pages/Withdrawals';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 
@@ -81,6 +83,8 @@ function AppContent() {
         return <AgentManagement />;
       case 'referral-management':
         return <ReferralManagement />;
+      case 'withdrawal-processing':
+        return <WithdrawalProcessing />;
       case 'manager-dashboard':
         return <ManagerDashboard />;
       case 'team-overview':
@@ -111,6 +115,8 @@ function AppContent() {
         return <Claims />;
       case 'commissions':
         return <Commissions />;
+      case 'withdrawals':
+        return <Withdrawals />;
       case 'reports':
         return <Reports />;
       case 'support':

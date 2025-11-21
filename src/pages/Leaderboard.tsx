@@ -42,7 +42,7 @@ export default function Leaderboard() {
         if (!acc[repId]) {
           acc[repId] = {
             rep_id: repId,
-            rep_name: ref.agents.full_name,
+            rep_name: ref.agents?.full_name || 'Unknown',
             total_referrals: 0,
             successful_claims: 0,
             total_commission: 0,

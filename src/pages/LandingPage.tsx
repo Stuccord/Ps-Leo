@@ -76,11 +76,11 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24">
-            <div className="flex items-center bg-white px-4 py-2 rounded-xl shadow-md">
+            <div className="flex items-center">
               <img
                 src="/Untitled-1 (5).png"
                 alt="BearGuard Support Services"
-                className={`transition-all duration-300 ${scrolled ? 'h-12' : 'h-14'} w-auto cursor-pointer`}
+                className={`transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'} w-auto cursor-pointer`}
                 onClick={() => scrollToSection('home')}
               />
             </div>
@@ -135,93 +135,105 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         )}
       </nav>
 
-      <section id="home" className="pt-40 pb-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-orange-100 to-transparent rounded-full blur-3xl opacity-30"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-100 to-transparent rounded-full blur-3xl opacity-20"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-orange-50 to-blue-50 rounded-full blur-3xl opacity-10"></div>
-        </div>
+      <section id="home" className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-transparent to-blue-50/20"></div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1 space-y-10">
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border-2 border-orange-200 text-orange-700 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all">
-                <Shield className="w-5 h-5" />
-                <span>Ghana's Premier Insurance Claims Partner</span>
+          <div className="text-center max-w-5xl mx-auto space-y-12">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
+                <Shield className="w-4 h-4" />
+                <span>Trusted Claims Partner Since 2020</span>
               </div>
 
-              <div className="space-y-6">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="text-gray-900">Had an </span>
-                  <span className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent">accident?</span>
-                  <span className="block mt-4 text-gray-800">Don't suffer twice</span>
-                </h1>
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight">
+                <span className="block text-gray-900">Had an Accident?</span>
+                <span className="block mt-4 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent">
+                  We Fight For You
+                </span>
+              </h1>
 
-                <div className="h-1 w-24 bg-gradient-to-r from-orange-600 to-orange-400 rounded-full"></div>
-              </div>
-
-              <p className="text-2xl sm:text-3xl font-light text-gray-700 leading-relaxed">
-                Get <span className="font-semibold text-orange-600">fast</span>, <span className="font-semibold text-orange-600">stress-free</span> insurance claims assistance
+              <p className="text-2xl sm:text-3xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
+                Get the insurance compensation you deserve—fast, stress-free, and hassle-free. We handle everything.
               </p>
-
-              <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
-                We help accident victims across Ghana secure the compensation they rightfully deserve—without the hassle, stress, or delay.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-5 pt-4">
-                <button
-                  onClick={() => setAppointmentModalOpen(true)}
-                  className="group px-12 py-6 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-2xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-300 font-bold text-xl flex items-center justify-center space-x-3 transform hover:scale-105 hover:-translate-y-1"
-                >
-                  <Calendar className="w-7 h-7" />
-                  <span>Book Appointment</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button
-                  onClick={() => onNavigate('signup')}
-                  className="px-12 py-6 bg-white text-orange-600 border-2 border-orange-600 rounded-2xl hover:bg-orange-50 transition-all shadow-xl hover:shadow-2xl font-bold text-xl transform hover:scale-105 hover:-translate-y-1"
-                >
-                  Become a Partner
-                </button>
-              </div>
-
-              <div className="grid grid-cols-3 gap-5 pt-6">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-orange-100 shadow-lg hover:shadow-2xl hover:border-orange-300 transition-all transform hover:-translate-y-2">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent mb-2">GHC 200</div>
-                  <div className="text-sm text-gray-600 font-medium">Per Referral</div>
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-green-100 shadow-lg hover:shadow-2xl hover:border-green-300 transition-all transform hover:-translate-y-2">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-2">7 Days</div>
-                  <div className="text-sm text-gray-600 font-medium">Avg. Time</div>
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-blue-100 shadow-lg hover:shadow-2xl hover:border-blue-300 transition-all transform hover:-translate-y-2">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">100%</div>
-                  <div className="text-sm text-gray-600 font-medium">Support</div>
-                </div>
-              </div>
             </div>
 
-            <div className="order-1 lg:order-2 relative">
-              <div className="absolute -inset-8 bg-gradient-to-r from-orange-400 via-orange-300 to-blue-400 rounded-[3rem] opacity-20 blur-3xl group-hover:opacity-30 transition-all duration-500"></div>
-              <div className="relative">
-                <div className="absolute -top-6 -right-6 w-72 h-72 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full opacity-10 blur-3xl"></div>
-                <div className="absolute -bottom-6 -left-6 w-64 h-64 bg-gradient-to-tr from-blue-500 to-blue-600 rounded-full opacity-10 blur-3xl"></div>
-                <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white/50 group">
-                  <img
-                    src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
-                    alt="Professional team ready to help with insurance claims"
-                    className="relative w-full h-[650px] object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-transparent"></div>
-                  <div className="absolute bottom-10 left-10 right-10 text-white space-y-3">
-                    <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-sm font-semibold mb-3">
-                      Trusted by 1000+ Clients
-                    </div>
-                    <p className="text-3xl font-bold drop-shadow-lg">Expert Team Ready to Help</p>
-                    <p className="text-lg text-white/90 drop-shadow">Professional support for your insurance claims journey</p>
-                  </div>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
+              <button
+                onClick={() => setAppointmentModalOpen(true)}
+                className="group px-14 py-7 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-2xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-400/50 font-bold text-2xl flex items-center space-x-4 transform hover:scale-105"
+              >
+                <Calendar className="w-8 h-8" />
+                <span>Book Free Consultation</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="px-14 py-7 bg-white text-gray-900 border-2 border-gray-900 rounded-2xl hover:bg-gray-900 hover:text-white transition-all shadow-xl font-bold text-2xl transform hover:scale-105"
+              >
+                Call Us Now
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto">
+              <div className="text-center space-y-3">
+                <div className="text-6xl font-black bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">
+                  GHC 200
                 </div>
+                <div className="text-lg text-gray-600 font-semibold">Commission Per Referral</div>
+              </div>
+              <div className="text-center space-y-3">
+                <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                  7 Days
+                </div>
+                <div className="text-lg text-gray-600 font-semibold">Average Processing Time</div>
+              </div>
+              <div className="text-center space-y-3">
+                <div className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                  1000+
+                </div>
+                <div className="text-lg text-gray-600 font-semibold">Clients Helped</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative mt-24">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
+              <img
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
+                alt="Professional team consultation"
+                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <p className="text-2xl font-bold mb-1">Expert Consultation</p>
+                <p className="text-sm text-white/90">Free case evaluation</p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
+              <img
+                src="/WhatsApp Image 2025-11-21 at 14.53.39_4041563b.jpg"
+                alt="Claims processing support"
+                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <p className="text-2xl font-bold mb-1">Fast Processing</p>
+                <p className="text-sm text-white/90">Claims in 7 days average</p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
+              <img
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
+                alt="Happy clients"
+                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <p className="text-2xl font-bold mb-1">Proven Results</p>
+                <p className="text-sm text-white/90">1000+ satisfied clients</p>
               </div>
             </div>
           </div>
@@ -631,7 +643,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <img
                 src="/Untitled-2 (12).png"
                 alt="BearGuard Support Services"
-                className="h-16 w-auto mb-4"
+                className="h-24 w-auto mb-6"
               />
               <p className="text-gray-400 text-xl leading-relaxed mb-4">We fight for what you deserve</p>
               <div className="flex space-x-4">

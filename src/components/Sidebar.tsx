@@ -17,7 +17,8 @@ import {
   MessageSquare,
   Shield,
   Trophy,
-  Wallet
+  Wallet,
+  Home
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -84,22 +85,14 @@ export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCo
       <div className="p-6 flex items-center justify-between border-b border-navy-700">
         {!collapsed && (
           <div className="flex items-center space-x-3">
-            <img
-              src="/Untitled-1 (5).png"
-              alt="BearGuard"
-              className="h-10 w-auto brightness-0 invert"
-            />
+            <h1 className="text-2xl font-bold text-white">BearGuard</h1>
             <div>
               <p className="text-xs text-gray-400 capitalize">{agent?.role || 'Rep'} Portal</p>
             </div>
           </div>
         )}
         {collapsed && (
-          <img
-            src="/Untitled-1 (5).png"
-            alt="BearGuard"
-            className="h-8 w-auto brightness-0 invert mx-auto"
-          />
+          <div className="text-xl font-bold text-white">BG</div>
         )}
         <button
           onClick={onToggleCollapse}
@@ -110,6 +103,13 @@ export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCo
       </div>
 
       <nav className="flex-1 p-4 space-y-2">
+        <button
+          onClick={() => onNavigate('landing')}
+          className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-navy-700 hover:text-white transition-colors"
+        >
+          <Home className="w-5 h-5 flex-shrink-0" />
+          {!collapsed && <span>Homepage</span>}
+        </button>
         {menuItems.map((item) => {
           const Icon = item.icon!;
           const isActive = currentPage === item.id;

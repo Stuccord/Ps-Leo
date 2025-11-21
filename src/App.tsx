@@ -45,8 +45,10 @@ function AppContent() {
       } else {
         setCurrentPage('referral-dashboard');
       }
+    } else if (!user) {
+      setCurrentPage('landing');
     }
-  }, [agent]);
+  }, [agent, user]);
 
   if (loading) {
     return (

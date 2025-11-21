@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import LandingPage from './pages/LandingPage';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NewClient from './pages/NewClient';
@@ -28,7 +30,7 @@ import TopNav from './components/TopNav';
 
 function AppContent() {
   const { user, agent, loading } = useAuth();
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [currentPage, setCurrentPage] = useState('landing');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -53,11 +55,26 @@ function AppContent() {
   }
 
   if (!user || !agent) {
-    return <Login />;
+    if (currentPage === 'landing') {
+      return <LandingPage onNavigate={setCurrentPage} />;
+    }
+    if (currentPage === 'signup') {
+      return <Signup onNavigate={setCurrentPage} />;
+    }
+    if (currentPage === 'login') {
+      return <Login onNavigate={setCurrentPage} />;
+    }
+    return <LandingPage onNavigate={setCurrentPage} />;
   }
 
   const renderPage = () => {
     switch (currentPage) {
+      case 'landing':
+        return <LandingPage onNavigate={setCurrentPage} />;
+      case 'signup':
+        return <Signup onNavigate={setCurrentPage} />;
+      case 'login':
+        return <Login onNavigate={setCurrentPage} />;
       case 'admin-dashboard':
         return <AdminDashboard />;
       case 'agent-management':

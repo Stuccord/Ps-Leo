@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Shield } from 'lucide-react';
+import { Shield, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
-export default function Login() {
+interface LoginProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function Login({ onNavigate }: LoginProps = {}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,14 +27,23 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-navy-500 via-navy-600 to-navy-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        {onNavigate && (
+          <button
+            onClick={() => onNavigate('landing')}
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back to Home</span>
+          </button>
+        )}
         <div className="bg-white rounded-3xl shadow-2xl p-8">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-4">
-              <Shield className="w-8 h-8 text-gray-900" />
+            <div className="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mb-4">
+              <Shield className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-navy-500">BearGuard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">BearGuard</h1>
             <p className="text-gray-600 mt-2">Referral Rep Portal</p>
           </div>
 
@@ -72,15 +85,25 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-navy-500 text-white py-3 rounded-xl font-semibold hover:bg-navy-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-orange-600 text-white py-3 rounded-xl font-semibold hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>Contact your administrator for login credentials</p>
-          </div>
+          {onNavigate && (
+            <div className="mt-6 text-center">
+              <p className="text-gray-600">
+                Don't have an account?{' '}
+                <button
+                  onClick={() => onNavigate('signup')}
+                  className="text-orange-600 hover:text-orange-700 font-semibold"
+                >
+                  Sign Up
+                </button>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

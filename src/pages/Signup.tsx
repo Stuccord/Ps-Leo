@@ -83,7 +83,7 @@ export default function Signup({ onNavigate }: SignupProps) {
         }
 
         if (retries >= maxRetries) {
-          throw new Error('Profile creation is taking longer than expected. Please try logging in.');
+          throw new Error('Account created successfully! Please log in to continue.');
         }
       }
     } catch (err: any) {

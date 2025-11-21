@@ -72,7 +72,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-white">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-2xl py-4' : 'bg-white/95 backdrop-blur-md shadow-xl py-6'
+        scrolled ? 'bg-white shadow-2xl py-2' : 'bg-white/95 backdrop-blur-md shadow-xl py-3'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
@@ -81,7 +81,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 src="/Ps-Leo Logo 1o.png"
                 alt="BearGuard Support Services"
                 className="transition-all duration-300 w-auto cursor-pointer"
-                style={{ height: scrolled ? '80px' : '120px' }}
+                style={{ height: scrolled ? '60px' : '80px' }}
                 onClick={() => scrollToSection('home')}
               />
             </div>

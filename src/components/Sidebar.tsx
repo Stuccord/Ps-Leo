@@ -84,16 +84,22 @@ export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCo
       <div className="p-6 flex items-center justify-between border-b border-navy-700">
         {!collapsed && (
           <div className="flex items-center space-x-3">
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-              agent?.role === 'admin' ? 'bg-yellow-500' : agent?.role === 'manager' ? 'bg-teal-600' : 'bg-yellow-500'
-            }`}>
-              <span className="text-xl font-bold">BG</span>
-            </div>
+            <img
+              src="/Untitled-1 (5).png"
+              alt="BearGuard"
+              className="h-10 w-auto brightness-0 invert"
+            />
             <div>
-              <h1 className="font-bold text-lg">BearGuard</h1>
-              <p className="text-xs text-gray-400 capitalize">{agent?.role || 'Rep'}</p>
+              <p className="text-xs text-gray-400 capitalize">{agent?.role || 'Rep'} Portal</p>
             </div>
           </div>
+        )}
+        {collapsed && (
+          <img
+            src="/Untitled-1 (5).png"
+            alt="BearGuard"
+            className="h-8 w-auto brightness-0 invert mx-auto"
+          />
         )}
         <button
           onClick={onToggleCollapse}

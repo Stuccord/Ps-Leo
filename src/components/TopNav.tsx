@@ -42,7 +42,13 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
                 <h3 className="font-semibold text-gray-900">Notifications</h3>
               </div>
               <div className="divide-y divide-gray-100">
-                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                <button
+                  onClick={() => {
+                    onNavigate('pending-referrals');
+                    setShowNotifications(false);
+                  }}
+                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
+                >
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                     <div className="flex-1">
@@ -51,8 +57,14 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
                       <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
                     </div>
                   </div>
-                </div>
-                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('commissions');
+                    setShowNotifications(false);
+                  }}
+                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
+                >
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                     <div className="flex-1">
@@ -61,8 +73,14 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
                       <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
                     </div>
                   </div>
-                </div>
-                <div className="p-4 hover:bg-gray-50 cursor-pointer">
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('policies');
+                    setShowNotifications(false);
+                  }}
+                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
+                >
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
                     <div className="flex-1">
@@ -71,10 +89,16 @@ export default function TopNav({ onMenuClick, onNavigate }: TopNavProps) {
                       <p className="text-xs text-gray-400 mt-1">1 day ago</p>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
               <div className="p-3 border-t border-gray-200 text-center">
-                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                <button
+                  onClick={() => {
+                    onNavigate('dashboard');
+                    setShowNotifications(false);
+                  }}
+                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                >
                   View all notifications
                 </button>
               </div>

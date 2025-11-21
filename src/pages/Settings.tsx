@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lock, Bell, Shield, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
+
+interface NotificationPreferences {
+  email_notifications: boolean;
+  commission_alerts: boolean;
+  policy_reminders: boolean;
+}
 
 export default function Settings() {
   const { agent } = useAuth();
@@ -11,6 +17,64 @@ export default function Settings() {
   const [showPasswords, setShowPasswords] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [notifications, setNotifications] = useState<NotificationPreferences>({
+    email_notifications: true,
+    commission_alerts: true,
+    policy_reminders: true,
+  });
+  const [notifLoading, setNotifLoading] = useState(false);
+
+  useEffect(() => {
+    if (agent) {
+      fetchNotificationPreferences();
+    }
+  }, [agent]);
+
+  const fetchNotificationPreferences = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('agents')
+        .select('notification_preferences')
+        .eq('id', agent!.id)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data?.notification_preferences) {
+        setNotifications(data.notification_preferences);
+      }
+    } catch (error) {
+      console.error('Error fetching notification preferences:', error);
+    }
+  };
+
+  const handleNotificationToggle = async (key: keyof NotificationPreferences) => {
+    const updatedNotifications = {
+      ...notifications,
+      [key]: !notifications[key],
+    };
+
+    setNotifications(updatedNotifications);
+    setNotifLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from('agents')
+        .update({ notification_preferences: updatedNotifications })
+        .eq('id', agent!.id);
+
+      if (error) throw error;
+
+      setMessage('Notification preferences updated!');
+      setTimeout(() => setMessage(''), 3000);
+    } catch (error: any) {
+      console.error('Error updating notification preferences:', error);
+      setNotifications(notifications);
+      setMessage('Failed to update notification preferences');
+    } finally {
+      setNotifLoading(false);
+    }
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,7 +208,13 @@ export default function Settings() {
               <p className="text-sm text-gray-600">Receive updates about your policies and claims</p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                checked={notifications.email_notifications}
+                onChange={() => handleNotificationToggle('email_notifications')}
+                disabled={notifLoading}
+              />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
@@ -155,7 +225,13 @@ export default function Settings() {
               <p className="text-sm text-gray-600">Get notified when you earn new commissions</p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                checked={notifications.commission_alerts}
+                onChange={() => handleNotificationToggle('commission_alerts')}
+                disabled={notifLoading}
+              />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
@@ -166,15 +242,17 @@ export default function Settings() {
               <p className="text-sm text-gray-600">Receive alerts for expiring policies</p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                checked={notifications.policy_reminders}
+                onChange={() => handleNotificationToggle('policy_reminders')}
+                disabled={notifLoading}
+              />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
         </div>
-
-        <p className="text-xs text-gray-500 mt-4">
-          Note: Notification preferences are currently for display only and will be fully functional in a future update.
-        </p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">

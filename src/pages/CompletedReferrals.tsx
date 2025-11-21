@@ -9,8 +9,7 @@ interface Referral {
   client_name: string;
   client_phone: string;
   hospital: string;
-  injury_type: string;
-  claim_amount: number;
+  injured_or_deceased: string;
   commission_amount: number;
   payment_date: string;
   created_at: string;
@@ -115,10 +114,7 @@ export default function CompletedReferrals() {
                   Hospital
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Injury Type
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Claim Amount
+                  Injured/Deceased
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Commission (5%)
@@ -150,10 +146,7 @@ export default function CompletedReferrals() {
                       <div className="text-sm text-gray-900">{referral.hospital}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{referral.injury_type}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {formatCurrency(parseFloat(referral.claim_amount.toString()))}
+                      <div className="text-sm text-gray-900">{referral.injured_or_deceased}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600">
                       {formatCurrency(parseFloat(referral.commission_amount.toString()))}

@@ -24,7 +24,7 @@ export default function TermsPolicies() {
           <div className="space-y-4 text-gray-700">
             <div className="bg-gray-50 rounded-lg p-4">
               <h3 className="font-semibold text-lg mb-2">Commission Rate</h3>
-              <p>Referral representatives earn <strong className="text-blue-900">5% commission</strong> on all successfully paid insurance claims.</p>
+              <p>Referral representatives earn <strong className="text-blue-900">GHS 200 commission</strong> per successfully completed case.</p>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">

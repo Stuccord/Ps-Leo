@@ -16,7 +16,7 @@ interface RecentReferral {
   case_number: string;
   client_name: string;
   hospital: string;
-  injury_type: string;
+  injured_or_deceased: string;
   status: string;
   commission_amount: number | null;
   created_at: string;
@@ -32,6 +32,7 @@ export default function ReferralDashboard() {
   });
   const [recentReferrals, setRecentReferrals] = useState<RecentReferral[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentMonth, setCurrentMonth] = useState('');
 
   useEffect(() => {
     if (agent) {
@@ -41,6 +42,10 @@ export default function ReferralDashboard() {
 
   const fetchDashboardData = async () => {
     try {
+      const currentMonth = new Date().getMonth() + 1;
+      const currentYear = new Date().getFullYear();
+      const monthName = new Date().toLocaleString('default', { month: 'long' });
+
       const [totalRes, pendingRes, completedRes, commissionsRes, recentRes] = await Promise.all([
         supabase
           .from('referrals')
@@ -58,9 +63,11 @@ export default function ReferralDashboard() {
           .eq('status', 'paid'),
         supabase
           .from('referrals')
-          .select('commission_amount')
+          .select('commission_amount, payment_date')
           .eq('rep_id', agent!.id)
-          .eq('commission_paid', true),
+          .eq('commission_paid', true)
+          .gte('payment_date', `${currentYear}-${String(currentMonth).padStart(2, '0')}-01`)
+          .lt('payment_date', `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-01`),
         supabase
           .from('referrals')
           .select('*')
@@ -80,6 +87,7 @@ export default function ReferralDashboard() {
         completedCases: completedRes.count || 0,
         commissionEarned: totalCommission,
       });
+      setCurrentMonth(monthName);
 
       setRecentReferrals(recentRes.data || []);
     } catch (error) {
@@ -154,7 +162,7 @@ export default function ReferralDashboard() {
           iconColor="text-green-700"
         />
         <StatCard
-          title="Commission Earned"
+          title={`${currentMonth} Commission`}
           value={formatCurrency(stats.commissionEarned)}
           icon={DollarSign}
           iconBgColor="bg-yellow-100"
@@ -180,7 +188,7 @@ export default function ReferralDashboard() {
                   Hospital
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Injury Type
+                  Injured/Deceased
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
@@ -213,7 +221,7 @@ export default function ReferralDashboard() {
                       <div className="text-sm text-gray-900">{referral.hospital}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{referral.injury_type}</div>
+                      <div className="text-sm text-gray-900">{referral.injured_or_deceased}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span

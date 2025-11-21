@@ -9,7 +9,7 @@ interface Referral {
   client_name: string;
   client_phone: string;
   hospital: string;
-  injury_type: string;
+  injured_or_deceased: string;
   accident_date: string;
   status: string;
   assigned_lawyer: string | null;
@@ -56,7 +56,6 @@ export default function ReferralManagement() {
       status: referral.status,
       assigned_lawyer: referral.assigned_lawyer || '',
       assigned_doctor: referral.assigned_doctor || '',
-      claim_amount: referral.claim_amount?.toString() || '',
       payment_date: referral.payment_date || '',
       notes: referral.notes || '',
     });
@@ -68,7 +67,6 @@ export default function ReferralManagement() {
         status: editData.status,
         assigned_lawyer: editData.assigned_lawyer || null,
         assigned_doctor: editData.assigned_doctor || null,
-        claim_amount: editData.claim_amount ? parseFloat(editData.claim_amount) : null,
         notes: editData.notes || null,
       };
 
@@ -196,7 +194,7 @@ export default function ReferralManagement() {
                   Assigned
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Claim
+                  Commission
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -217,7 +215,7 @@ export default function ReferralManagement() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{referral.client_name}</div>
-                        <div className="text-xs text-gray-500">{referral.injury_type}</div>
+                        <div className="text-xs text-gray-500">{referral.injured_or_deceased}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <select
@@ -249,13 +247,7 @@ export default function ReferralManagement() {
                         />
                       </td>
                       <td className="px-6 py-4">
-                        <input
-                          type="number"
-                          placeholder="Amount"
-                          value={editData.claim_amount}
-                          onChange={(e) => setEditData({ ...editData, claim_amount: e.target.value })}
-                          className="w-full text-xs px-2 py-1 border border-gray-300 rounded mb-1"
-                        />
+                        <div className="text-sm font-medium text-gray-900 mb-1">GHS 200</div>
                         {editData.status === 'paid' && (
                           <input
                             type="date"
@@ -293,7 +285,7 @@ export default function ReferralManagement() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">{referral.client_name}</div>
-                        <div className="text-xs text-gray-500">{referral.injury_type}</div>
+                        <div className="text-xs text-gray-500">{referral.injured_or_deceased}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeColor(referral.status)}`}>
@@ -305,9 +297,9 @@ export default function ReferralManagement() {
                         <div className="text-xs text-gray-500">{referral.assigned_doctor || '-'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{formatCurrency(referral.claim_amount)}</div>
-                        {referral.commission_amount && (
-                          <div className="text-xs text-green-600">Com: {formatCurrency(referral.commission_amount)}</div>
+                        <div className="text-sm font-medium text-gray-900">GHS 200</div>
+                        {referral.status === 'paid' && (
+                          <div className="text-xs text-green-600">Paid</div>
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

@@ -9,7 +9,7 @@ interface Referral {
   client_name: string;
   client_phone: string;
   hospital: string;
-  injury_type: string;
+  injured_or_deceased: string;
   accident_date: string;
   status: string;
   assigned_lawyer: string | null;
@@ -144,13 +144,13 @@ export default function PendingReferrals() {
                   Hospital
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Injury Type
+                  Injured/Deceased
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Claim Amount
+                  Commission
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date Submitted
@@ -179,7 +179,7 @@ export default function PendingReferrals() {
                       <div className="text-sm text-gray-900">{referral.hospital}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{referral.injury_type}</div>
+                      <div className="text-sm text-gray-900">{referral.injured_or_deceased}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
@@ -191,7 +191,7 @@ export default function PendingReferrals() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {formatCurrency(referral.claim_amount)}
+                      GHS 200
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                       {formatDate(referral.created_at)}

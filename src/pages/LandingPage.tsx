@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Heart, TrendingUp, Users, FileCheck, Phone, Mail, MapPin, CheckCircle, ArrowRight, Menu, X, Clock, Award, Headphones, Star, DollarSign, Briefcase, Activity, Calendar } from 'lucide-react';
 import AppointmentModal from '../components/AppointmentModal';
+import { useAuth } from '../contexts/AuthContext';
 
 interface LandingPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function LandingPage({ onNavigate }: LandingPageProps) {
+  const { user, agent } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -107,12 +109,20 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 Contact
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-600 hover:text-orange-700 font-semibold transition-colors text-lg border-2 border-transparent hover:border-orange-600 rounded-lg">
-                Login
-              </button>
-              <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg hover:shadow-xl font-semibold text-lg transform hover:scale-105">
-                Join Network
-              </button>
+              {user && agent ? (
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg hover:shadow-xl font-semibold text-lg transform hover:scale-105">
+                  Go to Dashboard
+                </button>
+              ) : (
+                <>
+                  <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-600 hover:text-orange-700 font-semibold transition-colors text-lg border-2 border-transparent hover:border-orange-600 rounded-lg">
+                    Login
+                  </button>
+                  <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg hover:shadow-xl font-semibold text-lg transform hover:scale-105">
+                    Join Network
+                  </button>
+                </>
+              )}
             </div>
 
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 hover:bg-orange-50 rounded-lg transition-colors">
@@ -129,8 +139,14 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Services</button>
               <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Why Us</button>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Contact</button>
-              <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-600 hover:bg-orange-50 rounded-lg font-medium text-lg transition-colors">Login</button>
-              <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-lg transition-colors">Join Network</button>
+              {user && agent ? (
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-lg transition-colors">Go to Dashboard</button>
+              ) : (
+                <>
+                  <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-600 hover:bg-orange-50 rounded-lg font-medium text-lg transition-colors">Login</button>
+                  <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-lg transition-colors">Join Network</button>
+                </>
+              )}
             </div>
           </div>
         )}

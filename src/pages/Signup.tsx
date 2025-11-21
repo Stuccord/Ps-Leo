@@ -62,8 +62,8 @@ export default function Signup({ onNavigate }: SignupProps) {
       if (authData.user) {
         setSuccess(true);
         setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+          onNavigate('dashboard');
+        }, 2500);
       }
     } catch (err: any) {
       if (err.message.includes('weak_password') || err.message.includes('weak')) {

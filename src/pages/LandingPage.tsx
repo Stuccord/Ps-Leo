@@ -72,15 +72,15 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-white">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-xl py-3' : 'bg-white/95 backdrop-blur-md shadow-md py-4'
+        scrolled ? 'bg-white shadow-xl py-2' : 'bg-white shadow-lg py-3'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
+          <div className="flex justify-between items-center h-24">
+            <div className="flex items-center bg-white p-3 rounded-xl shadow-md">
               <img
                 src="/Untitled-2 (12).png"
                 alt="BearGuard Support Services"
-                className={`transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'} w-auto cursor-pointer`}
+                className={`transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'} w-auto cursor-pointer drop-shadow-lg`}
                 onClick={() => scrollToSection('home')}
               />
             </div>
@@ -135,79 +135,92 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         )}
       </nav>
 
-      <section id="home" className="pt-36 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 via-white to-blue-50 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <section id="home" className="pt-40 pb-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-orange-100 to-transparent rounded-full blur-3xl opacity-30"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-100 to-transparent rounded-full blur-3xl opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-orange-50 to-blue-50 rounded-full blur-3xl opacity-10"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1 space-y-8">
-              <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-full text-sm font-bold shadow-xl animate-bounce">
-                <Shield className="w-5 h-5 mr-2" />
-                Ghana's #1 Insurance Claims Partner
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1 space-y-10">
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border-2 border-orange-200 text-orange-700 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all">
+                <Shield className="w-5 h-5" />
+                <span>Ghana's Premier Insurance Claims Partner</span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Had an accident?
-                <span className="block mt-3 bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">
-                  Don't suffer twice
-                </span>
-              </h1>
+              <div className="space-y-6">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="text-gray-900">Had an </span>
+                  <span className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent">accident?</span>
+                  <span className="block mt-4 text-gray-800">Don't suffer twice</span>
+                </h1>
 
-              <p className="text-2xl sm:text-3xl font-semibold text-gray-700">
-                Get fast, stress-free insurance claims
+                <div className="h-1 w-24 bg-gradient-to-r from-orange-600 to-orange-400 rounded-full"></div>
+              </div>
+
+              <p className="text-2xl sm:text-3xl font-light text-gray-700 leading-relaxed">
+                Get <span className="font-semibold text-orange-600">fast</span>, <span className="font-semibold text-orange-600">stress-free</span> insurance claims assistance
               </p>
 
-              <p className="text-xl text-gray-600 leading-relaxed">
-                BearGuard Support Services helps accident victims across Ghana secure the compensation they rightfully deserve—without the hassle, stress, or delay.
+              <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
+                We help accident victims across Ghana secure the compensation they rightfully deserve—without the hassle, stress, or delay.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-5 pt-4">
                 <button
                   onClick={() => setAppointmentModalOpen(true)}
-                  className="group px-10 py-5 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-300 font-bold text-xl flex items-center justify-center space-x-2 transform hover:scale-105"
+                  className="group px-12 py-6 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-2xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-300 font-bold text-xl flex items-center justify-center space-x-3 transform hover:scale-105 hover:-translate-y-1"
                 >
-                  <Calendar className="w-6 h-6" />
+                  <Calendar className="w-7 h-7" />
                   <span>Book Appointment</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
                   onClick={() => onNavigate('signup')}
-                  className="px-10 py-5 bg-white text-orange-600 border-3 border-orange-600 rounded-xl hover:bg-orange-50 transition-all shadow-xl hover:shadow-2xl font-bold text-xl transform hover:scale-105"
+                  className="px-12 py-6 bg-white text-orange-600 border-2 border-orange-600 rounded-2xl hover:bg-orange-50 transition-all shadow-xl hover:shadow-2xl font-bold text-xl transform hover:scale-105 hover:-translate-y-1"
                 >
                   Become a Partner
                 </button>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white p-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">GHC 200</div>
-                  <div className="text-sm text-gray-600 mt-1 font-medium">Per Referral</div>
+              <div className="grid grid-cols-3 gap-5 pt-6">
+                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-orange-100 shadow-lg hover:shadow-2xl hover:border-orange-300 transition-all transform hover:-translate-y-2">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent mb-2">GHC 200</div>
+                  <div className="text-sm text-gray-600 font-medium">Per Referral</div>
                 </div>
-                <div className="bg-white p-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">Fast</div>
-                  <div className="text-sm text-gray-600 mt-1 font-medium">Processing</div>
+                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-green-100 shadow-lg hover:shadow-2xl hover:border-green-300 transition-all transform hover:-translate-y-2">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-2">7 Days</div>
+                  <div className="text-sm text-gray-600 font-medium">Avg. Time</div>
                 </div>
-                <div className="bg-white p-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">100%</div>
-                  <div className="text-sm text-gray-600 mt-1 font-medium">Support</div>
+                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-blue-100 shadow-lg hover:shadow-2xl hover:border-blue-300 transition-all transform hover:-translate-y-2">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">100%</div>
+                  <div className="text-sm text-gray-600 font-medium">Support</div>
                 </div>
               </div>
             </div>
 
-            <div className="order-1 lg:order-2 relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-3xl opacity-30 blur-2xl group-hover:opacity-40 transition-opacity"></div>
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                <img
-                  src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
-                  alt="Professional team ready to help with insurance claims"
-                  className="relative w-full h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8 text-white">
-                  <p className="text-2xl font-bold mb-2">Expert Team Ready to Help</p>
-                  <p className="text-lg">Professional support for your insurance claims</p>
+            <div className="order-1 lg:order-2 relative">
+              <div className="absolute -inset-8 bg-gradient-to-r from-orange-400 via-orange-300 to-blue-400 rounded-[3rem] opacity-20 blur-3xl group-hover:opacity-30 transition-all duration-500"></div>
+              <div className="relative">
+                <div className="absolute -top-6 -right-6 w-72 h-72 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full opacity-10 blur-3xl"></div>
+                <div className="absolute -bottom-6 -left-6 w-64 h-64 bg-gradient-to-tr from-blue-500 to-blue-600 rounded-full opacity-10 blur-3xl"></div>
+                <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white/50 group">
+                  <img
+                    src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
+                    alt="Professional team ready to help with insurance claims"
+                    className="relative w-full h-[650px] object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-transparent"></div>
+                  <div className="absolute bottom-10 left-10 right-10 text-white space-y-3">
+                    <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-sm font-semibold mb-3">
+                      Trusted by 1000+ Clients
+                    </div>
+                    <p className="text-3xl font-bold drop-shadow-lg">Expert Team Ready to Help</p>
+                    <p className="text-lg text-white/90 drop-shadow">Professional support for your insurance claims journey</p>
+                  </div>
                 </div>
               </div>
             </div>

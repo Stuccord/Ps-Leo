@@ -12,7 +12,11 @@ interface AdminStats {
   pendingClaims: number;
 }
 
-export default function AdminDashboard() {
+interface AdminDashboardProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function AdminDashboard({ onNavigate }: AdminDashboardProps = {}) {
   const [stats, setStats] = useState<AdminStats>({
     totalAgents: 0,
     activeAgents: 0,
@@ -130,17 +134,26 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
           <div className="space-y-3">
-            <button className="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+            <button
+              onClick={() => onNavigate?.('agent-management')}
+              className="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+            >
               <div className="font-semibold text-blue-900">Manage Agents</div>
               <div className="text-sm text-blue-600">View and manage all agents</div>
             </button>
-            <button className="w-full text-left px-4 py-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
-              <div className="font-semibold text-green-900">Approve Claims</div>
-              <div className="text-sm text-green-600">Review pending claims</div>
+            <button
+              onClick={() => onNavigate?.('referral-management')}
+              className="w-full text-left px-4 py-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
+            >
+              <div className="font-semibold text-green-900">Manage Referrals</div>
+              <div className="text-sm text-green-600">Review pending referrals</div>
             </button>
-            <button className="w-full text-left px-4 py-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
-              <div className="font-semibold text-purple-900">Process Commissions</div>
-              <div className="text-sm text-purple-600">Manage commission payments</div>
+            <button
+              onClick={() => onNavigate?.('withdrawal-processing')}
+              className="w-full text-left px-4 py-3 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors"
+            >
+              <div className="font-semibold text-orange-900">Process Withdrawals</div>
+              <div className="text-sm text-orange-600">Manage withdrawal requests</div>
             </button>
           </div>
         </div>

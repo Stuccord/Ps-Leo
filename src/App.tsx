@@ -100,7 +100,7 @@ function AppContent() {
 
     switch (currentPage) {
       case 'admin-dashboard':
-        return <AdminDashboard />;
+        return <AdminDashboard onNavigate={setCurrentPage} />;
       case 'agent-management':
         return <AgentManagement />;
       case 'referral-management':

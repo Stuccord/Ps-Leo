@@ -75,12 +75,12 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         scrolled ? 'bg-white shadow-2xl py-3' : 'bg-white/95 backdrop-blur-md shadow-xl py-4'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center bg-white px-6 py-3 rounded-2xl shadow-lg border border-gray-100">
+          <div className="flex justify-between items-center h-24">
+            <div className="flex items-center">
               <img
                 src="/Untitled-1 (5).png"
                 alt="BearGuard Support Services"
-                className={`transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'} w-auto cursor-pointer`}
+                className={`transition-all duration-300 ${scrolled ? 'h-20' : 'h-24'} w-auto cursor-pointer`}
                 onClick={() => scrollToSection('home')}
               />
             </div>

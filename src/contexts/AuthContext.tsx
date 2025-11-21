@@ -28,12 +28,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       (() => {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchAgentProfile(session.user.id);
-        } else {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          setUser(session?.user ?? null);
+          if (session?.user) {
+            fetchAgentProfile(session.user.id);
+          }
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
           setAgent(null);
           setLoading(false);
         }
@@ -53,8 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      if (!data && retries < 10) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+      if (!data && retries < 5) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
         return fetchAgentProfile(userId, retries + 1);
       }
 

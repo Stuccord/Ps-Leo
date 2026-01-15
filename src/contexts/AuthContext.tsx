@@ -28,19 +28,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      (() => {
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-          setUser(session?.user ?? null);
-          if (session?.user) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          if (event === 'SIGNED_IN') {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await supabase.auth.refreshSession();
+            const { data } = await supabase.auth.getSession();
+            if (data.session?.user) {
+              fetchAgentProfile(data.session.user.id);
+            } else {
+              fetchAgentProfile(session.user.id);
+            }
+          } else {
             fetchAgentProfile(session.user.id);
           }
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-          setAgent(null);
-          setLoading(false);
         }
-      })();
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        setAgent(null);
+        setLoading(false);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -56,8 +65,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      if (!data && retries < 3) {
-        await new Promise(resolve => setTimeout(resolve, 100));
+      if (!data && retries < 5) {
+        await new Promise(resolve => setTimeout(resolve, 500 * (retries + 1)));
         return fetchAgentProfile(userId, retries + 1);
       }
 
@@ -65,6 +74,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching agent profile:', error);
+      if (retries < 5) {
+        await new Promise(resolve => setTimeout(resolve, 500 * (retries + 1)));
+        return fetchAgentProfile(userId, retries + 1);
+      }
       setLoading(false);
     }
   };

@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       (() => {
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
           setUser(session?.user ?? null);
           if (session?.user) {
             fetchAgentProfile(session.user.id);
@@ -56,8 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      if (!data && retries < 2) {
-        await new Promise(resolve => setTimeout(resolve, 300));
+      if (!data && retries < 3) {
+        await new Promise(resolve => setTimeout(resolve, 100));
         return fetchAgentProfile(userId, retries + 1);
       }
 

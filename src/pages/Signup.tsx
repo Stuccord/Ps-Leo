@@ -52,6 +52,7 @@ export default function Signup({ onNavigate }: SignupProps) {
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo: undefined,
           data: {
             full_name: formData.fullName,
             phone: formData.phone,
@@ -62,8 +63,10 @@ export default function Signup({ onNavigate }: SignupProps) {
 
       if (signUpError) throw signUpError;
 
-      if (authData.user) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+      if (authData.user && authData.session) {
+        onNavigate('dashboard');
+      } else if (authData.user) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
@@ -71,10 +74,10 @@ export default function Signup({ onNavigate }: SignupProps) {
         });
 
         if (signInError) {
-          setSuccess(true);
+          setError('Account created but unable to login automatically. Please try logging in.');
           setTimeout(() => {
             onNavigate('login');
-          }, 1000);
+          }, 2000);
         } else {
           onNavigate('dashboard');
         }

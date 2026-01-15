@@ -24,6 +24,7 @@ export default function Signup({ onNavigate }: SignupProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess(false);
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -68,19 +69,22 @@ export default function Signup({ onNavigate }: SignupProps) {
         });
 
         if (signInError) {
-          setError('Account created but auto-login failed. Please login manually.');
           setSuccess(true);
+          setTimeout(() => {
+            onNavigate('login');
+          }, 2000);
         }
       }
     } catch (err: any) {
-      if (err.message.includes('weak_password') || err.message.includes('weak')) {
+      if (err.message.includes('User already registered')) {
+        setError('An account with this email already exists. Please login instead.');
+      } else if (err.message.includes('weak_password') || err.message.includes('weak')) {
         setError('Please choose a stronger password (avoid common words, use mix of characters)');
       } else if (err.message.includes('rate_limit') || err.message.includes('email_send')) {
         setError('Too many signup attempts. Please wait a moment and try again.');
       } else {
         setError(err.message || 'Failed to create account. Please try again.');
       }
-    } finally {
       setLoading(false);
     }
   };
@@ -118,7 +122,7 @@ export default function Signup({ onNavigate }: SignupProps) {
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
                 <div className="flex items-center space-x-2">
                   <Check className="w-5 h-5" />
-                  <span>Account created successfully! A confirmation email has been sent to your inbox.</span>
+                  <span>Account created successfully! Redirecting to login...</span>
                 </div>
               </div>
             )}

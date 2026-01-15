@@ -63,7 +63,7 @@ export default function Signup({ onNavigate }: SignupProps) {
       if (signUpError) throw signUpError;
 
       if (authData.user) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
@@ -74,7 +74,7 @@ export default function Signup({ onNavigate }: SignupProps) {
           setSuccess(true);
           setTimeout(() => {
             onNavigate('login');
-          }, 1500);
+          }, 1000);
         } else {
           onNavigate('dashboard');
         }

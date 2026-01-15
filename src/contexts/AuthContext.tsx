@@ -56,8 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      if (!data && retries < 3) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+      if (!data && retries < 2) {
+        await new Promise(resolve => setTimeout(resolve, 300));
         return fetchAgentProfile(userId, retries + 1);
       }
 

@@ -78,14 +78,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       }`}>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <img
-                src="/Ps-Leo Logo 1o.png"
-                alt="BearGuard Support Services"
-                className="w-auto cursor-pointer transition-all duration-300"
-                style={{ height: scrolled ? '80px' : '100px' }}
-                onClick={() => scrollToSection('home')}
-              />
+            <div className="flex items-center cursor-pointer group" onClick={() => scrollToSection('home')}>
+              <div className="flex flex-col">
+                <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight transition-all duration-300 group-hover:text-orange-500">
+                  Bear<span className="text-orange-500 group-hover:text-white">Guard</span>
+                </span>
+                <span className="text-xs sm:text-sm text-gray-400 tracking-wider uppercase font-medium">Support Services</span>
+              </div>
             </div>
 
             <div className="hidden lg:flex items-center space-x-8">

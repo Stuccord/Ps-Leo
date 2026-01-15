@@ -73,83 +73,78 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl py-3'
-          : 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl py-4'
+      <nav className={`fixed top-0 left-0 right-0 z-50 bg-slate-950 shadow-lg transition-all duration-300 ${
+        scrolled ? 'py-3' : 'py-4'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center">
-            <div className="flex items-center group">
-              <div className={`relative transition-all duration-500 ${scrolled ? 'animate-in fade-in' : ''}`}>
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/30 via-amber-500/20 to-orange-500/30 rounded-full blur-2xl group-hover:blur-3xl group-hover:from-orange-500/40 group-hover:to-amber-500/40 transition-all duration-500"></div>
-                <img
-                  src="/Ps-Leo Logo 1o.png"
-                  alt="BearGuard Support Services"
-                  className="relative transition-all duration-500 w-auto cursor-pointer drop-shadow-2xl hover:scale-105 transform"
-                  style={{ height: scrolled ? '120px' : '180px' }}
-                  onClick={() => scrollToSection('home')}
-                />
-              </div>
+            <div className="flex items-center">
+              <img
+                src="/Ps-Leo Logo 1o.png"
+                alt="BearGuard Support Services"
+                className="w-auto cursor-pointer transition-all duration-300"
+                style={{ height: scrolled ? '80px' : '100px' }}
+                onClick={() => scrollToSection('home')}
+              />
             </div>
 
             <div className="hidden lg:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
+              <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-orange-500 transition-colors duration-200 font-semibold text-base relative group">
                 Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
+              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-orange-500 transition-colors duration-200 font-semibold text-base relative group">
                 About
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
+              <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-orange-500 transition-colors duration-200 font-semibold text-base relative group">
                 Services
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('why-us')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
+              <button onClick={() => scrollToSection('why-us')} className="text-gray-300 hover:text-orange-500 transition-colors duration-200 font-semibold text-base relative group">
                 Why Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
+              <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-orange-500 transition-colors duration-200 font-semibold text-base relative group">
                 Contact
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </button>
               {user && agent ? (
-                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="px-8 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-orange-500/50 hover:shadow-xl hover:shadow-orange-500/70 font-bold text-lg transform hover:scale-105">
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="ml-4 px-6 py-2.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors duration-200 font-semibold text-base">
                   Go to Dashboard
                 </button>
               ) : (
                 <>
-                  <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-400 hover:text-orange-300 font-bold transition-all duration-300 text-lg border-2 border-orange-500/50 hover:border-orange-400 rounded-xl hover:bg-orange-500/10">
+                  <button onClick={() => onNavigate('login')} className="ml-4 px-5 py-2 text-gray-300 hover:text-white font-semibold transition-colors duration-200 text-base border border-gray-600 hover:border-gray-500 rounded-lg">
                     Login
                   </button>
-                  <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-orange-500/50 hover:shadow-xl hover:shadow-orange-500/70 font-bold text-lg transform hover:scale-105">
+                  <button onClick={() => onNavigate('signup')} className="px-6 py-2.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors duration-200 font-semibold text-base">
                     Join Network
                   </button>
                 </>
               )}
             </div>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 hover:bg-slate-700 rounded-lg transition-colors">
-              {mobileMenuOpen ? <X className="w-7 h-7 text-gray-300" /> : <Menu className="w-7 h-7 text-gray-300" />}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2.5 hover:bg-slate-800 rounded-lg transition-colors duration-200">
+              {mobileMenuOpen ? <X className="w-6 h-6 text-gray-300" /> : <Menu className="w-6 h-6 text-gray-300" />}
             </button>
           </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 shadow-2xl animate-in slide-in-from-top duration-300">
+          <div className="lg:hidden border-t border-slate-800 bg-slate-950 shadow-xl">
             <div className="px-4 py-4 space-y-2">
-              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Home</button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">About</button>
-              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Services</button>
-              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Why Us</button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Contact</button>
+              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 hover:text-orange-500 rounded-lg text-base transition-colors">Home</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 hover:text-orange-500 rounded-lg text-base transition-colors">About</button>
+              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 hover:text-orange-500 rounded-lg text-base transition-colors">Services</button>
+              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 hover:text-orange-500 rounded-lg text-base transition-colors">Why Us</button>
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 hover:text-orange-500 rounded-lg text-base transition-colors">Contact</button>
               {user && agent ? (
-                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg hover:from-orange-600 hover:to-amber-700 font-bold text-lg transition-colors shadow-lg shadow-orange-500/50">Go to Dashboard</button>
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="block w-full px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-semibold text-base transition-colors">Go to Dashboard</button>
               ) : (
                 <>
-                  <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-400 hover:bg-slate-700 rounded-lg font-bold text-lg transition-colors border border-orange-500/30">Login</button>
-                  <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg hover:from-orange-600 hover:to-amber-700 font-bold text-lg transition-colors shadow-lg shadow-orange-500/50">Join Network</button>
+                  <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-800 rounded-lg font-semibold text-base transition-colors border border-gray-700">Login</button>
+                  <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-semibold text-base transition-colors">Join Network</button>
                 </>
               )}
             </div>

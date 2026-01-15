@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bell, Menu, LogOut, User, Settings } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
 
 interface TopNavProps {
   onMenuClick: () => void;
@@ -8,10 +9,59 @@ interface TopNavProps {
   onCloseSidebar: () => void;
 }
 
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: string;
+  is_read: boolean;
+  created_at: string;
+}
+
 export default function TopNav({ onMenuClick, onNavigate, onCloseSidebar }: TopNavProps) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const { agent, signOut } = useAuth();
+
+  useEffect(() => {
+    if (agent) {
+      fetchNotifications();
+    }
+  }, [agent]);
+
+  const fetchNotifications = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('*')
+        .or(`agent_id.eq.${agent!.id},agent_id.is.null`)
+        .eq('is_read', false)
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      if (error) throw error;
+      setNotifications(data || []);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    }
+  };
+
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
+  };
+
+  const unreadCount = notifications.length;
 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
@@ -41,7 +91,11 @@ export default function TopNav({ onMenuClick, onNavigate, onCloseSidebar }: TopN
             className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <Bell className="w-6 h-6 text-gray-700" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            )}
           </button>
 
           {showNotifications && (
@@ -50,62 +104,45 @@ export default function TopNav({ onMenuClick, onNavigate, onCloseSidebar }: TopN
                 <h3 className="font-semibold text-gray-900">Notifications</h3>
               </div>
               <div className="divide-y divide-gray-100">
-                <button
-                  onClick={() => {
-                    onNavigate('pending-referrals');
-                    setShowNotifications(false);
-                  }}
-                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">New referral approved</p>
-                      <p className="text-xs text-gray-500 mt-1">Your referral for John Doe has been approved</p>
-                      <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
-                    </div>
+                {notifications.length === 0 ? (
+                  <div className="p-8 text-center">
+                    <Bell className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">No new notifications</p>
                   </div>
-                </button>
-                <button
-                  onClick={() => {
-                    onNavigate('commissions');
-                    setShowNotifications(false);
-                  }}
-                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">Commission earned</p>
-                      <p className="text-xs text-gray-500 mt-1">You earned GHS 150.00 in commission</p>
-                      <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
-                    </div>
-                  </div>
-                </button>
-                <button
-                  onClick={() => {
-                    onNavigate('policies');
-                    setShowNotifications(false);
-                  }}
-                  className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">Policy expiring soon</p>
-                      <p className="text-xs text-gray-500 mt-1">Client policy expires in 30 days</p>
-                      <p className="text-xs text-gray-400 mt-1">1 day ago</p>
-                    </div>
-                  </div>
-                </button>
+                ) : (
+                  notifications.map((notification) => (
+                    <button
+                      key={notification.id}
+                      onClick={() => {
+                        onNavigate('notifications');
+                        setShowNotifications(false);
+                      }}
+                      className="w-full p-4 hover:bg-gray-50 text-left transition-colors"
+                    >
+                      <div className="flex items-start space-x-3">
+                        <div className={`w-2 h-2 rounded-full mt-2 ${
+                          notification.type === 'success' ? 'bg-green-500' :
+                          notification.type === 'warning' ? 'bg-yellow-500' :
+                          notification.type === 'error' ? 'bg-red-500' :
+                          'bg-blue-500'
+                        }`}></div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-gray-900">{notification.title}</p>
+                          <p className="text-xs text-gray-500 mt-1 line-clamp-2">{notification.message}</p>
+                          <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(notification.created_at)}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))
+                )}
               </div>
               <div className="p-3 border-t border-gray-200 text-center">
                 <button
                   onClick={() => {
-                    onNavigate('dashboard');
+                    onNavigate('notifications');
                     setShowNotifications(false);
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className="text-sm text-orange-600 hover:text-orange-700 font-medium"
                 >
                   View all notifications
                 </button>

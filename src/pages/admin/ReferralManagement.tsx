@@ -247,7 +247,9 @@ export default function ReferralManagement() {
                         />
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900 mb-1">GHS 200</div>
+                        <div className="text-sm font-medium text-gray-900 mb-1">
+                          {referral.commission_amount ? formatCurrency(referral.commission_amount) : <span className="text-gray-400">Pending</span>}
+                        </div>
                         {editData.status === 'paid' && (
                           <input
                             type="date"
@@ -297,7 +299,9 @@ export default function ReferralManagement() {
                         <div className="text-xs text-gray-500">{referral.assigned_doctor || '-'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">GHS 200</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {referral.commission_amount ? formatCurrency(referral.commission_amount) : <span className="text-gray-400">Pending</span>}
+                        </div>
                         {referral.status === 'paid' && (
                           <div className="text-xs text-green-600">Paid</div>
                         )}

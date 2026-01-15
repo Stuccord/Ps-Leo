@@ -87,28 +87,69 @@ export default function Reports() {
     return `GHS ${amount.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   };
 
-  const exportToCSV = () => {
-    const csvContent = `Insurance Agent Report
-Generated: ${new Date().toLocaleString()}
+  const exportToCSV = async () => {
+    try {
+      const [referrals, commissions] = await Promise.all([
+        supabase
+          .from('referrals')
+          .select('*')
+          .eq('rep_id', agent!.id)
+          .order('created_at', { ascending: false }),
+        supabase
+          .from('commissions')
+          .select('*')
+          .eq('agent_id', agent!.id)
+          .order('earned_date', { ascending: false }),
+      ]);
 
-Summary Statistics:
-Total Clients Referred: ${stats.totalClients}
-Total Policies: ${stats.totalPolicies}
-Total Claims: ${stats.totalClaims}
-Total Commissions (Year): ${formatCurrency(stats.totalCommissions)}
-Policy Active Rate: ${stats.activeRate.toFixed(1)}%
-Claim Approval Rate: ${stats.approvalRate.toFixed(1)}%
+      let csvContent = `BearGuard Insurance Agent Performance Report
+Agent: ${agent?.full_name}
+Generated: ${new Date().toLocaleString()}
+Period: ${selectedPeriod.replace('-', ' ').toUpperCase()}
+
+========================================
+SUMMARY STATISTICS
+========================================
+Total Referrals,${stats.totalClients}
+Total Policies,${stats.totalPolicies}
+Total Claims,${stats.totalClaims}
+Total Commissions,${formatCurrency(stats.totalCommissions)}
+Policy Active Rate,${stats.activeRate.toFixed(1)}%
+Claim Approval Rate,${stats.approvalRate.toFixed(1)}%
+
+========================================
+REFERRAL DETAILS
+========================================
+Case Number,Client Name,Hospital,Status,Commission Amount,Date Submitted
 `;
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `agent-report-${new Date().toISOString().split('T')[0]}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+      referrals.data?.forEach((ref: any) => {
+        csvContent += `${ref.case_number},${ref.client_name},${ref.hospital},${ref.status},${ref.commission_amount || 0},${new Date(ref.created_at).toLocaleDateString()}\n`;
+      });
+
+      csvContent += `\n========================================
+COMMISSION BREAKDOWN
+========================================
+Amount,Status,Date Earned,Payment Status
+`;
+
+      commissions.data?.forEach((comm: any) => {
+        csvContent += `${comm.amount},${comm.status},${new Date(comm.earned_date).toLocaleDateString()},${comm.commission_paid ? 'Paid' : 'Pending'}\n`;
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `bearguard-report-${agent?.full_name.replace(/\s+/g, '-')}-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting report:', error);
+      alert('Failed to export report');
+    }
   };
 
   if (loading) {
@@ -128,10 +169,10 @@ Claim Approval Rate: ${stats.approvalRate.toFixed(1)}%
         </div>
         <button
           onClick={exportToCSV}
-          className="px-6 py-3 bg-purple-600 text-white rounded-xl font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl flex items-center space-x-2"
+          className="px-6 py-3 bg-orange-600 text-white rounded-xl font-semibold hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl flex items-center space-x-2"
         >
           <Download className="w-5 h-5" />
-          <span>Export Report</span>
+          <span>Export to CSV</span>
         </button>
       </div>
 

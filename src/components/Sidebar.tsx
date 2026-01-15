@@ -34,6 +34,10 @@ const agentMenuItems = [
   { id: 'new-referral', label: 'New Referral', icon: UserPlus },
   { id: 'pending-referrals', label: 'Pending Referrals', icon: Clock },
   { id: 'completed-referrals', label: 'Completed Referrals', icon: CheckCircle },
+  { id: 'new-client', label: 'New Client', icon: UserPlus },
+  { id: 'policies', label: 'Policies', icon: FileText },
+  { id: 'claims', label: 'Claims', icon: ClipboardList },
+  { id: 'commissions', label: 'Commissions', icon: DollarSign },
   { id: 'withdrawals', label: 'Withdrawals', icon: Wallet },
   { id: 'documents', label: 'Documents', icon: Download },
   { id: 'support-tickets', label: 'Support / Complaints', icon: MessageSquare },
@@ -55,15 +59,13 @@ const adminMenuItems = [
   { id: 'admin-dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'agent-management', label: 'Agent Management', icon: Users },
   { id: 'referral-management', label: 'Referral Management', icon: ClipboardList },
+  { id: 'claims-management', label: 'Claims Management', icon: FileText },
   { id: 'withdrawal-processing', label: 'Withdrawal Processing', icon: Wallet },
   { id: 'documents', label: 'Documents', icon: Download },
   { id: 'support-tickets', label: 'Support Tickets', icon: MessageSquare },
   { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
-  { id: 'policies', label: 'All Policies', icon: FileText },
-  { id: 'claims', label: 'All Claims', icon: ClipboardList },
   { id: 'commissions', label: 'Commissions', icon: DollarSign },
   { id: 'reports', label: 'Reports', icon: BarChart3 },
-  { id: 'support', label: 'Support', icon: BookOpen },
 ];
 
 export default function Sidebar({ currentPage, onNavigate, collapsed, onToggleCollapse }: SidebarProps) {

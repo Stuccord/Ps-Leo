@@ -16,6 +16,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AgentManagement from './pages/admin/AgentManagement';
 import ReferralManagement from './pages/admin/ReferralManagement';
 import WithdrawalProcessing from './pages/admin/WithdrawalProcessing';
+import ClaimsManagement from './pages/admin/ClaimsManagement';
+import FileClaim from './pages/FileClaim';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
 import TeamOverview from './pages/manager/TeamOverview';
 import ReferralDashboard from './pages/ReferralDashboard';
@@ -27,6 +29,7 @@ import SupportTickets from './pages/SupportTickets';
 import TermsPolicies from './pages/TermsPolicies';
 import Leaderboard from './pages/Leaderboard';
 import Withdrawals from './pages/Withdrawals';
+import Notifications from './pages/Notifications';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 
@@ -105,6 +108,8 @@ function AppContent() {
         return <AgentManagement />;
       case 'referral-management':
         return <ReferralManagement />;
+      case 'claims-management':
+        return <ClaimsManagement />;
       case 'withdrawal-processing':
         return <WithdrawalProcessing />;
       case 'manager-dashboard':
@@ -134,7 +139,9 @@ function AppContent() {
       case 'policies':
         return <Policies />;
       case 'claims':
-        return <Claims />;
+        return <Claims onNavigate={setCurrentPage} />;
+      case 'file-claim':
+        return <FileClaim onNavigate={setCurrentPage} />;
       case 'commissions':
         return <Commissions />;
       case 'withdrawals':
@@ -147,6 +154,8 @@ function AppContent() {
         return <Profile />;
       case 'settings':
         return <Settings />;
+      case 'notifications':
+        return <Notifications />;
       default:
         if (agent?.role === 'admin') return <AdminDashboard />;
         if (agent?.role === 'manager') return <ManagerDashboard />;

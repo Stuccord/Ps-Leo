@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, Filter, RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Search, Filter, RefreshCw, CheckCircle, XCircle, Clock, Plus } from 'lucide-react';
 import { supabase, Claim } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -8,7 +8,11 @@ interface ClaimWithDetails extends Claim {
   policy_number: string;
 }
 
-export default function Claims() {
+interface ClaimsProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function Claims({ onNavigate }: ClaimsProps) {
   const { agent } = useAuth();
   const [claims, setClaims] = useState<ClaimWithDetails[]>([]);
   const [filteredClaims, setFilteredClaims] = useState<ClaimWithDetails[]>([]);
@@ -122,9 +126,20 @@ export default function Claims() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Claims Center</h1>
-        <p className="text-gray-600">Manage and track all insurance claims</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Claims Center</h1>
+          <p className="text-gray-600">Manage and track all insurance claims</p>
+        </div>
+        {onNavigate && (
+          <button
+            onClick={() => onNavigate('file-claim')}
+            className="bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-orange-700 transition-colors flex items-center space-x-2"
+          >
+            <Plus className="w-5 h-5" />
+            <span>File New Claim</span>
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -191,7 +191,7 @@ export default function PendingReferrals() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      GHS 200
+                      {referral.claim_amount ? formatCurrency(referral.claim_amount * 0.05) : <span className="text-gray-400">Pending</span>}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                       {formatDate(referral.created_at)}

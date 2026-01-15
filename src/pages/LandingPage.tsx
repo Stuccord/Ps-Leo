@@ -73,78 +73,83 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-2xl py-2' : 'bg-white/95 backdrop-blur-md shadow-xl py-1'
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl py-3'
+          : 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl py-4'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <img
-                src="/Ps-Leo Logo 1o.png"
-                alt="BearGuard Support Services"
-                className="transition-all duration-300 w-auto cursor-pointer"
-                style={{ height: scrolled ? '100px' : '150px' }}
-                onClick={() => scrollToSection('home')}
-              />
+            <div className="flex items-center group">
+              <div className={`relative transition-all duration-500 ${scrolled ? 'animate-in fade-in' : ''}`}>
+                <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/30 via-amber-500/20 to-orange-500/30 rounded-full blur-2xl group-hover:blur-3xl group-hover:from-orange-500/40 group-hover:to-amber-500/40 transition-all duration-500"></div>
+                <img
+                  src="/Ps-Leo Logo 1o.png"
+                  alt="BearGuard Support Services"
+                  className="relative transition-all duration-500 w-auto cursor-pointer drop-shadow-2xl hover:scale-105 transform"
+                  style={{ height: scrolled ? '120px' : '180px' }}
+                  onClick={() => scrollToSection('home')}
+                />
+              </div>
             </div>
 
             <div className="hidden lg:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg relative group">
+              <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
                 Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg relative group">
+              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
                 About
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg relative group">
+              <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
                 Services
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('why-us')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg relative group">
+              <button onClick={() => scrollToSection('why-us')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
                 Why Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-lg relative group">
+              <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-orange-400 transition-all duration-300 font-semibold text-lg relative group">
                 Contact
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </button>
               {user && agent ? (
-                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg hover:shadow-xl font-semibold text-lg transform hover:scale-105">
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="px-8 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-orange-500/50 hover:shadow-xl hover:shadow-orange-500/70 font-bold text-lg transform hover:scale-105">
                   Go to Dashboard
                 </button>
               ) : (
                 <>
-                  <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-600 hover:text-orange-700 font-semibold transition-colors text-lg border-2 border-transparent hover:border-orange-600 rounded-lg">
+                  <button onClick={() => onNavigate('login')} className="px-6 py-2.5 text-orange-400 hover:text-orange-300 font-bold transition-all duration-300 text-lg border-2 border-orange-500/50 hover:border-orange-400 rounded-xl hover:bg-orange-500/10">
                     Login
                   </button>
-                  <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg hover:shadow-xl font-semibold text-lg transform hover:scale-105">
+                  <button onClick={() => onNavigate('signup')} className="px-8 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-orange-500/50 hover:shadow-xl hover:shadow-orange-500/70 font-bold text-lg transform hover:scale-105">
                     Join Network
                   </button>
                 </>
               )}
             </div>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 hover:bg-orange-50 rounded-lg transition-colors">
-              {mobileMenuOpen ? <X className="w-7 h-7 text-gray-700" /> : <Menu className="w-7 h-7 text-gray-700" />}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 hover:bg-slate-700 rounded-lg transition-colors">
+              {mobileMenuOpen ? <X className="w-7 h-7 text-gray-300" /> : <Menu className="w-7 h-7 text-gray-300" />}
             </button>
           </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 bg-white shadow-2xl animate-in slide-in-from-top duration-300">
+          <div className="lg:hidden border-t border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 shadow-2xl animate-in slide-in-from-top duration-300">
             <div className="px-4 py-4 space-y-2">
-              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Home</button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">About</button>
-              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Services</button>
-              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Why Us</button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg text-lg transition-colors">Contact</button>
+              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Home</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">About</button>
+              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Services</button>
+              <button onClick={() => scrollToSection('why-us')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Why Us</button>
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-3 text-gray-300 hover:bg-slate-700 hover:text-orange-400 rounded-lg text-lg transition-colors">Contact</button>
               {user && agent ? (
-                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-lg transition-colors">Go to Dashboard</button>
+                <button onClick={() => onNavigate(agent.role === 'admin' ? 'admin-dashboard' : agent.role === 'manager' ? 'manager-dashboard' : 'referral-dashboard')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg hover:from-orange-600 hover:to-amber-700 font-bold text-lg transition-colors shadow-lg shadow-orange-500/50">Go to Dashboard</button>
               ) : (
                 <>
-                  <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-600 hover:bg-orange-50 rounded-lg font-medium text-lg transition-colors">Login</button>
-                  <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-lg hover:from-orange-700 hover:to-orange-800 font-medium text-lg transition-colors">Join Network</button>
+                  <button onClick={() => onNavigate('login')} className="block w-full text-left px-4 py-3 text-orange-400 hover:bg-slate-700 rounded-lg font-bold text-lg transition-colors border border-orange-500/30">Login</button>
+                  <button onClick={() => onNavigate('signup')} className="block w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg hover:from-orange-600 hover:to-amber-700 font-bold text-lg transition-colors shadow-lg shadow-orange-500/50">Join Network</button>
                 </>
               )}
             </div>
@@ -152,7 +157,76 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         )}
       </nav>
 
-      <section id="home" className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center space-y-12 animate-in fade-in slide-in-from-bottom duration-1000">
+            <div className="flex justify-center mb-12">
+              <div className="relative group">
+                <div className="absolute -inset-8 bg-gradient-to-r from-orange-500/40 via-amber-500/30 to-orange-500/40 rounded-full blur-3xl group-hover:blur-[80px] transition-all duration-700 animate-pulse"></div>
+                <div className="absolute -inset-6 bg-gradient-to-r from-orange-600/20 via-amber-600/20 to-orange-600/20 rounded-full blur-2xl"></div>
+                <img
+                  src="/Ps-Leo Logo 1o.png"
+                  alt="BearGuard Support Services"
+                  className="relative w-auto h-64 md:h-80 lg:h-96 drop-shadow-2xl transform hover:scale-105 transition-all duration-500 mx-auto"
+                  style={{ filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.6))' }}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-lg">
+                BearGuard Support Services
+              </h1>
+              <p className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-lg">
+                Your Shield in Times of Need
+              </p>
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Ghana's premier accident claims facilitation and advocacy agency
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+              <button
+                onClick={() => setAppointmentModalOpen(true)}
+                className="group px-12 py-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-2xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-2xl shadow-orange-500/50 hover:shadow-orange-500/70 font-bold text-xl flex items-center space-x-3 transform hover:scale-105"
+              >
+                <Calendar className="w-7 h-7" />
+                <span>Book Free Consultation</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="px-12 py-5 bg-slate-800/80 backdrop-blur-sm text-white border-2 border-orange-500/50 rounded-2xl hover:bg-slate-700 hover:border-orange-400 transition-all duration-300 shadow-xl font-bold text-xl transform hover:scale-105"
+              >
+                Call Us Now
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 max-w-3xl mx-auto">
+              <div className="text-center space-y-3 bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-green-500/30 shadow-xl">
+                <div className="text-5xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                  90 Days
+                </div>
+                <div className="text-lg text-gray-300 font-semibold">Average Processing Time</div>
+              </div>
+              <div className="text-center space-y-3 bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 shadow-xl">
+                <div className="text-5xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  200+
+                </div>
+                <div className="text-lg text-gray-300 font-semibold">Clients Helped</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="home" className="pt-20 pb-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-transparent to-blue-50/20"></div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -173,38 +247,6 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <p className="text-2xl sm:text-3xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
                 Get the insurance compensation you deserve—fast, stress-free, and hassle-free. We handle everything.
               </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
-              <button
-                onClick={() => setAppointmentModalOpen(true)}
-                className="group px-14 py-7 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-2xl hover:from-orange-700 hover:to-orange-800 transition-all shadow-2xl hover:shadow-orange-400/50 font-bold text-2xl flex items-center space-x-4 transform hover:scale-105"
-              >
-                <Calendar className="w-8 h-8" />
-                <span>Book Free Consultation</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="px-14 py-7 bg-white text-gray-900 border-2 border-gray-900 rounded-2xl hover:bg-gray-900 hover:text-white transition-all shadow-xl font-bold text-2xl transform hover:scale-105"
-              >
-                Call Us Now
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-16 max-w-3xl mx-auto">
-              <div className="text-center space-y-3">
-                <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                  90 Days
-                </div>
-                <div className="text-lg text-gray-600 font-semibold">Average Processing Time</div>
-              </div>
-              <div className="text-center space-y-3">
-                <div className="text-6xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
-                  200+
-                </div>
-                <div className="text-lg text-gray-600 font-semibold">Clients Helped</div>
-              </div>
             </div>
           </div>
         </div>

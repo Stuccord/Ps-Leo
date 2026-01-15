@@ -61,7 +61,17 @@ export default function Signup({ onNavigate }: SignupProps) {
 
       if (signUpError) throw signUpError;
 
-      setSuccess(true);
+      if (authData.user) {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (signInError) {
+          setError('Account created but auto-login failed. Please login manually.');
+          setSuccess(true);
+        }
+      }
     } catch (err: any) {
       if (err.message.includes('weak_password') || err.message.includes('weak')) {
         setError('Please choose a stronger password (avoid common words, use mix of characters)');

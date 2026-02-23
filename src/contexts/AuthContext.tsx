@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const fetchAgentProfile = async (userId: string) => {
     try {
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Profile fetch timeout')), 3000)
+        setTimeout(() => reject(new Error('Profile fetch timeout')), 2000)
       );
 
       const fetchPromise = supabase
@@ -41,8 +41,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error('Error fetching agent profile:', error);
       setAgent(null);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -56,11 +54,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!mounted) return;
 
         setUser(session?.user ?? null);
+        setLoading(false);
 
         if (session?.user) {
-          await fetchAgentProfile(session.user.id);
-        } else {
-          setLoading(false);
+          fetchAgentProfile(session.user.id);
         }
       } catch (error) {
         console.error('Error initializing auth:', error);
@@ -69,13 +66,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }
     };
-
-    const timeout = setTimeout(() => {
-      if (mounted && loading) {
-        console.error('Auth initialization timeout');
-        setLoading(false);
-      }
-    }, 5000);
 
     init();
 
@@ -90,13 +80,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
         setAgent(null);
-        setLoading(false);
       }
     });
 
     return () => {
       mounted = false;
-      clearTimeout(timeout);
       subscription.unsubscribe();
     };
   }, []);

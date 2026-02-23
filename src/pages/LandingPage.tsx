@@ -161,28 +161,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center space-y-12 animate-in fade-in slide-in-from-bottom duration-1000">
             <div className="flex justify-center mb-12">
-              <div className="relative group">
-                <div className="absolute -inset-8 bg-gradient-to-r from-orange-500/40 via-amber-500/30 to-orange-500/40 rounded-full blur-3xl group-hover:blur-[80px] transition-all duration-700 animate-pulse"></div>
-                <div className="absolute -inset-6 bg-gradient-to-r from-orange-600/20 via-amber-600/20 to-orange-600/20 rounded-full blur-2xl"></div>
+              <div className="relative w-full max-w-5xl">
                 <img
-                  src="/Ps-Leo Logo 1o.png"
-                  alt="BearGuard Support Services"
-                  className="relative w-auto h-64 md:h-80 lg:h-96 drop-shadow-2xl transform hover:scale-105 transition-all duration-500 mx-auto"
-                  style={{ filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.6))' }}
+                  src="/image.png"
+                  alt="Professional claims support"
+                  className="relative w-full h-auto rounded-3xl shadow-2xl transform hover:scale-[1.02] transition-all duration-500 mx-auto"
                 />
               </div>
-            </div>
-
-            <div className="space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-lg">
-                BearGuard Support Services
-              </h1>
-              <p className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-lg">
-                Your Shield in Times of Need
-              </p>
-              <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Ghana's premier accident claims facilitation and advocacy agency
-              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">

@@ -209,33 +209,11 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-transparent to-blue-50/20"></div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="text-center max-w-5xl mx-auto space-y-12">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
-                <Shield className="w-4 h-4" />
-                <span>Trusted Claims Partner Since 2020</span>
-              </div>
-
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight">
-                <span className="block text-gray-900">Had an Accident?</span>
-                <span className="block mt-4 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent">
-                  We Fight For You
-                </span>
-              </h1>
-
-              <p className="text-2xl sm:text-3xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
-                Get the insurance compensation you deserve—fast, stress-free, and hassle-free. We handle everything.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative mt-16">
           <div className="relative overflow-hidden rounded-3xl shadow-2xl">
             <img
               src="/image.png"
               alt="Professional consultation and support"
-              className="w-full h-[600px] object-cover"
+              className="w-full h-auto object-cover"
             />
           </div>
         </div>

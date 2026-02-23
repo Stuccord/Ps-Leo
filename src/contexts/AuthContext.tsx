@@ -20,11 +20,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const init = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchAgentProfile(session.user.id);
-      } else {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          await fetchAgentProfile(session.user.id);
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
         setLoading(false);
       }
     };
@@ -32,16 +37,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     init();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchAgentProfile(session.user.id);
+      (async () => {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+          setUser(session?.user ?? null);
+          if (session?.user) {
+            await fetchAgentProfile(session.user.id);
+          }
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+          setAgent(null);
+          setLoading(false);
         }
-      } else if (event === 'SIGNED_OUT') {
-        setUser(null);
-        setAgent(null);
-        setLoading(false);
-      }
+      })();
     });
 
     return () => {
@@ -51,15 +58,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchAgentProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout')), 10000)
+      );
+
+      const queryPromise = supabase
         .from('agents')
         .select('*')
         .eq('id', userId)
         .maybeSingle();
 
-      if (error) throw error;
+      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
-      setAgent(data);
+      if (error) {
+        console.error('Error fetching agent profile:', error);
+        setAgent(null);
+      } else {
+        setAgent(data);
+      }
     } catch (error) {
       console.error('Error fetching agent profile:', error);
       setAgent(null);

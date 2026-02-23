@@ -209,12 +209,53 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-transparent to-blue-50/20"></div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-            <img
-              src="/image.png"
-              alt="Professional consultation and support"
-              className="w-full h-auto object-cover"
-            />
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold">
+                <Shield className="w-4 h-4" />
+                <span>Trusted Claims Partner Since 2020</span>
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+                <span className="block text-gray-900">Had an Accident?</span>
+                <span className="block mt-4 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent">
+                  We Fight For You
+                </span>
+              </h1>
+
+              <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed font-light">
+                Get the insurance compensation you deserve—fast, stress-free, and hassle-free. We handle everything.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button
+                  onClick={() => setAppointmentModalOpen(true)}
+                  className="group px-8 py-4 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 font-bold text-lg flex items-center justify-center space-x-2 transform hover:scale-105"
+                >
+                  <Calendar className="w-6 h-6" />
+                  <span>Book Free Consultation</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="px-8 py-4 bg-white text-orange-600 border-2 border-orange-500 rounded-xl hover:bg-orange-50 transition-all duration-300 shadow-lg font-bold text-lg transform hover:scale-105"
+                >
+                  Learn More
+                </button>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                <img
+                  src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
+                  alt="Professional consultation and support"
+                  className="w-full h-[500px] object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl"></div>
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-amber-500/20 rounded-full blur-3xl"></div>
+            </div>
           </div>
         </div>
       </section>

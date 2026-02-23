@@ -245,44 +245,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto relative mt-24">
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
-              <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
-                alt="Professional team consultation"
-                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-2xl font-bold mb-1">Expert Consultation</p>
-                <p className="text-sm text-white/90">Free case evaluation</p>
-              </div>
-            </div>
-            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
-              <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.39_4041563b.jpg"
-                alt="Claims processing support"
-                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-2xl font-bold mb-1">Fast Processing</p>
-                <p className="text-sm text-white/90">Claims in 90 days average</p>
-              </div>
-            </div>
-            <div className="relative overflow-hidden rounded-3xl shadow-xl group">
-              <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
-                alt="Happy clients"
-                className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-2xl font-bold mb-1">Proven Results</p>
-                <p className="text-sm text-white/90">200+ satisfied clients</p>
-              </div>
-            </div>
+        <div className="max-w-7xl mx-auto relative mt-16">
+          <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+            <img
+              src="/image.png"
+              alt="Professional consultation and support"
+              className="w-full h-[600px] object-cover"
+            />
           </div>
         </div>
       </section>

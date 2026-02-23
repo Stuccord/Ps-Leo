@@ -532,7 +532,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-6 bg-gradient-to-r from-white to-orange-200 rounded-3xl transform rotate-3 opacity-30 group-hover:opacity-40 transition-opacity"></div>
               <img
-                src="https://images.pexels.com/photos/4226721/pexels-photo-4226721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src="/image.png"
                 alt="Professional healthcare partner"
                 className="relative rounded-3xl shadow-2xl w-full h-[550px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />

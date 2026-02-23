@@ -18,57 +18,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [agent, setAgent] = useState<Agent | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          await fetchAgentProfile(session.user.id);
-        } else {
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error('Error initializing auth:', error);
-        setLoading(false);
-      }
-    };
-
-    init();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      (async () => {
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-          setUser(session?.user ?? null);
-          if (session?.user) {
-            await fetchAgentProfile(session.user.id);
-          }
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-          setAgent(null);
-          setLoading(false);
-        }
-      })();
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
   const fetchAgentProfile = async (userId: string) => {
     try {
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), 10000)
-      );
-
-      const queryPromise = supabase
+      const { data, error } = await supabase
         .from('agents')
         .select('*')
         .eq('id', userId)
         .maybeSingle();
-
-      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
       if (error) {
         console.error('Error fetching agent profile:', error);
@@ -83,6 +39,61 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const init = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (!mounted) return;
+
+        setUser(session?.user ?? null);
+
+        if (session?.user) {
+          await fetchAgentProfile(session.user.id);
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    const timeout = setTimeout(() => {
+      if (mounted && loading) {
+        console.error('Auth initialization timeout');
+        setLoading(false);
+      }
+    }, 5000);
+
+    init();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!mounted) return;
+
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchAgentProfile(session.user.id);
+        }
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        setAgent(null);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      mounted = false;
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const signIn = async (email: string, password: string) => {
     try {

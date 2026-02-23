@@ -19,30 +19,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const init = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchAgentProfile(session.user.id);
       } else {
         setLoading(false);
       }
-    }).catch(() => {
-      setLoading(false);
-    });
+    };
+
+    init();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      (() => {
-        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-          setUser(session?.user ?? null);
-          if (session?.user) {
-            fetchAgentProfile(session.user.id);
-          }
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-          setAgent(null);
-          setLoading(false);
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchAgentProfile(session.user.id);
         }
-      })();
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        setAgent(null);
+        setLoading(false);
+      }
     });
 
     return () => {

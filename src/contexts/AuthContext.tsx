@@ -19,12 +19,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-      }
-    }, 3000);
-
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       if (session?.user) {
@@ -52,12 +46,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     return () => {
-      clearTimeout(timeout);
       subscription.unsubscribe();
     };
   }, []);
 
-  const fetchAgentProfile = async (userId: string, retries = 0) => {
+  const fetchAgentProfile = async (userId: string) => {
     try {
       const { data, error } = await supabase
         .from('agents')
@@ -67,16 +60,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      if (!data && retries < 2) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        return fetchAgentProfile(userId, retries + 1);
-      }
-
       setAgent(data);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching agent profile:', error);
       setAgent(null);
+    } finally {
       setLoading(false);
     }
   };

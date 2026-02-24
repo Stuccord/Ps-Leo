@@ -151,61 +151,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         )}
       </nav>
 
-      <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center space-y-12 animate-in fade-in slide-in-from-bottom duration-1000">
-            <div className="flex justify-center mb-12">
-              <div className="relative w-full max-w-5xl">
-                <img
-                  src="/image.png"
-                  alt="Professional claims support"
-                  className="relative w-full h-auto rounded-3xl shadow-2xl transform hover:scale-[1.02] transition-all duration-500 mx-auto"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <button
-                onClick={() => setAppointmentModalOpen(true)}
-                className="group px-12 py-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white rounded-2xl hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-2xl shadow-orange-500/50 hover:shadow-orange-500/70 font-bold text-xl flex items-center space-x-3 transform hover:scale-105"
-              >
-                <Calendar className="w-7 h-7" />
-                <span>Book Free Consultation</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="px-12 py-5 bg-slate-800/80 backdrop-blur-sm text-white border-2 border-orange-500/50 rounded-2xl hover:bg-slate-700 hover:border-orange-400 transition-all duration-300 shadow-xl font-bold text-xl transform hover:scale-105"
-              >
-                Call Us Now
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 max-w-3xl mx-auto">
-              <div className="text-center space-y-3 bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-green-500/30 shadow-xl">
-                <div className="text-5xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                  90 Days
-                </div>
-                <div className="text-lg text-gray-300 font-semibold">Average Processing Time</div>
-              </div>
-              <div className="text-center space-y-3 bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 shadow-xl">
-                <div className="text-5xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  200+
-                </div>
-                <div className="text-lg text-gray-300 font-semibold">Clients Helped</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="home" className="pt-20 pb-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      <section id="home" className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-transparent to-blue-50/20"></div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -458,7 +404,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-blue-600 rounded-3xl opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
               <img
-                src="/WhatsApp Image 2025-11-21 at 14.53.38_237cc202.jpg"
+                src="/WhatsApp Image 2025-11-21 at 14.53.39_d63d639e.jpg"
                 alt="Client receiving support and guidance"
                 className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
@@ -536,7 +482,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="relative group">
               <div className="absolute -inset-6 bg-gradient-to-r from-white to-orange-200 rounded-3xl transform rotate-3 opacity-30 group-hover:opacity-40 transition-opacity"></div>
               <img
-                src="/image.png"
+                src="/WhatsApp Image 2025-11-21 at 14.53.38_5172faac.jpg"
                 alt="Professional healthcare partner"
                 className="relative rounded-3xl shadow-2xl w-full h-[550px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />

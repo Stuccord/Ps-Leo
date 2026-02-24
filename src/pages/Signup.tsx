@@ -64,7 +64,7 @@ export default function Signup({ onNavigate }: SignupProps) {
       if (signUpError) throw signUpError;
 
       if (authData.user && authData.session) {
-        onNavigate('dashboard');
+        window.location.reload();
       } else if (authData.user) {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -79,7 +79,7 @@ export default function Signup({ onNavigate }: SignupProps) {
             onNavigate('login');
           }, 2000);
         } else {
-          onNavigate('dashboard');
+          window.location.reload();
         }
       }
     } catch (err: any) {

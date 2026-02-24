@@ -81,13 +81,22 @@ function AppContent() {
     return <LandingPage onNavigate={setCurrentPage} />;
   }
 
-  if (!agent && user) {
+  useEffect(() => {
+    if (user && !agent && !loading) {
+      const timer = setTimeout(() => {
+        setCurrentPage('referral-dashboard');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [user, agent, loading]);
+
+  if (!agent && user && !loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <img src="/Ps-Leo_9-removebg-preview.png" alt="BearGuard" className="w-32 h-32 mx-auto mb-4 animate-pulse" />
-          <p className="text-gray-600 mt-4">Loading your profile...</p>
-          <p className="text-sm text-gray-500 mt-2">If this takes too long, try refreshing the page</p>
+          <p className="text-gray-600 mt-4">Setting up your profile...</p>
+          <p className="text-sm text-gray-500 mt-2">This will only take a moment</p>
         </div>
       </div>
     );

@@ -20,24 +20,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchAgentProfile = async (userId: string) => {
     try {
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Profile fetch timeout')), 2000)
-      );
-
-      const fetchPromise = supabase
+      const { data, error } = await supabase
         .from('agents')
         .select('*')
         .eq('id', userId)
         .maybeSingle();
 
-      const { data, error } = await Promise.race([fetchPromise, timeoutPromise]) as any;
-
       if (error) {
         console.error('Error fetching agent profile:', error);
-        setAgent(null);
-      } else {
-        setAgent(data);
       }
+
+      setAgent(data || null);
     } catch (error) {
       console.error('Error fetching agent profile:', error);
       setAgent(null);

@@ -5,7 +5,7 @@
 **Status**: CONNECTED AND WORKING
 
 **Connection Details**:
-- Database URL: `https://pqtsmiknsccktunencgx.supabase.co`
+- Database URL: `https://xilkyifqeelgsqbfokce.supabase.co`
 - PostgreSQL Version: 17.6
 - Authentication: Configured and working
 
@@ -55,8 +55,8 @@
 
 **Environment Variables Required** (for Netlify):
 ```
-VITE_SUPABASE_URL=https://pqtsmiknsccktunencgx.supabase.co
-VITE_SUPABASE_ANON_KEY=<your_anon_key_from_.env>
+VITE_SUPABASE_URL=https://xilkyifqeelgsqbfokce.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpbGt5aWZxZWVsZ3NxYmZva2NlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTM4MjAsImV4cCI6MjA4NzQ2OTgyMH0.fovfGQFwwdHggbSf8pLH-NqNZ7jJ2OpwsD6y4Lh1RnI
 ```
 
 ---

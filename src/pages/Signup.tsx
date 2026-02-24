@@ -63,32 +63,15 @@ export default function Signup({ onNavigate }: SignupProps) {
 
       if (signUpError) throw signUpError;
 
-      if (authData.user && authData.session) {
+      if (authData.user) {
+        await new Promise(resolve => setTimeout(resolve, 500));
         window.location.reload();
-      } else if (authData.user) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (signInError) {
-          setError('Account created but unable to login automatically. Please try logging in.');
-          setTimeout(() => {
-            onNavigate('login');
-          }, 2000);
-        } else {
-          window.location.reload();
-        }
       }
     } catch (err: any) {
       if (err.message.includes('User already registered')) {
         setError('An account with this email already exists. Please login instead.');
       } else if (err.message.includes('weak_password') || err.message.includes('weak')) {
         setError('Please choose a stronger password (avoid common words, use mix of characters)');
-      } else if (err.message.includes('rate_limit') || err.message.includes('email_send')) {
-        setError('Too many signup attempts. Please wait a moment and try again.');
       } else {
         setError(err.message || 'Failed to create account. Please try again.');
       }

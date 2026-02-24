@@ -28,8 +28,6 @@ export default function Login({ onNavigate }: LoginProps = {}) {
       if (error) {
         if (error.message.includes('Invalid login credentials')) {
           setError('Invalid email or password. Please check your credentials and try again.');
-        } else if (error.message.includes('Email not confirmed')) {
-          setError('Please confirm your email address before logging in.');
         } else {
           setError(error.message || 'Login failed. Please try again.');
         }

@@ -11,7 +11,7 @@ export default function NewReferral() {
     client_phone: '',
     client_email: '',
     hospital: '',
-    injured_or_deceased: '',
+    injury_type: '',
     accident_date: '',
     accident_description: '',
   });
@@ -48,7 +48,7 @@ export default function NewReferral() {
         client_phone: '',
         client_email: '',
         hospital: '',
-        injured_or_deceased: '',
+        injury_type: '',
         accident_date: '',
         accident_description: '',
       });
@@ -147,13 +147,13 @@ export default function NewReferral() {
             </div>
 
             <div>
-              <label htmlFor="injured_or_deceased" className="block text-sm font-medium text-gray-700 mb-2">
-                Injured/Deceased *
+              <label htmlFor="injury_type" className="block text-sm font-medium text-gray-700 mb-2">
+                Injury Type *
               </label>
               <select
-                id="injured_or_deceased"
-                name="injured_or_deceased"
-                value={formData.injured_or_deceased}
+                id="injury_type"
+                name="injury_type"
+                value={formData.injury_type}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"

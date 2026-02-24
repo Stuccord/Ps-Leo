@@ -53,6 +53,15 @@ function AppContent() {
     }
   }, [agent, user]);
 
+  useEffect(() => {
+    if (user && !agent && !loading) {
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [user, agent, loading]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">

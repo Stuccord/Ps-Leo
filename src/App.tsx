@@ -81,15 +81,6 @@ function AppContent() {
     return <LandingPage onNavigate={setCurrentPage} />;
   }
 
-  useEffect(() => {
-    if (user && !agent && !loading) {
-      const timer = setTimeout(() => {
-        setCurrentPage('referral-dashboard');
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [user, agent, loading]);
-
   if (!agent && user && !loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
